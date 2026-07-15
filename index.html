@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autonomex — Beratungsberichte. Automatisiert.</title>
+<meta name="description" content="Automatisierte DIN-EN-16247/BAFA-Beratungsberichte für deutsche Energieberatungen — Entwurf in Minuten statt Tagen. Automated DIN EN 16247/BAFA advisory reports for German energy consultancies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coal:#12161c; --coal2:#1c222b; --panel:#191f27; --steel:#2f3742; --line:#293039;
+    --fog:#f2f0ea; --dim:#8a93a3; --dimmer:#5a6270;
+    --orange:#e8a33d; --orange-glow:rgba(232,163,61,.16); --amber:#e8a33d; --ok:#5abf8a;
+    --black:'Archivo Black',sans-serif; --sans:'Archivo',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--coal);color:var(--fog);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--orange);color:var(--coal)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,52px)}
+  .mono{font-family:var(--mono)}
+
+  /* language toggle: body gets class "en" (NOT "lang-en" — that would hide body itself).
+     Only ever hide the inactive language; never set display, so each element keeps its natural layout. */
+  body:not(.en) .lang-en{display:none !important}
+  body.en .lang-de{display:none !important}
+
+  /* scanline texture */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.05;
+    background:repeating-linear-gradient(0deg,transparent 0 2px,#000 2px 4px)}
+
+  /* ============ NAV ============ */
+  nav{position:sticky;top:0;z-index:50;background:rgba(18,22,28,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;justify-content:space-between;align-items:stretch;max-width:1200px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;padding:15px clamp(20px,4vw,52px);font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;font-weight:600}
+  .brand svg{width:22px;height:22px;flex-shrink:0}
+  .nav-r{display:flex;align-items:center}
+  .nav-r a{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:16px 16px;color:var(--dim);transition:color .15s;cursor:pointer;background:none;border:none;font:inherit}
+  .nav-r a:hover{color:var(--orange)}
+  .nav-r a.cta{background:var(--orange);color:var(--coal);font-weight:600;padding:16px 26px;margin-left:6px}
+  .nav-r a.cta:hover{background:var(--fog);color:var(--coal)}
+  .nav-r .langbtn{border-left:1px solid var(--line);font-weight:600;color:var(--fog)}
+  @media(max-width:820px){.nav-r a:not(.cta):not(.langbtn){display:none}}
+
+  /* status bar */
+  .statusbar{border-bottom:1px solid var(--line);background:var(--coal2)}
+  .statusbar .in{display:flex;gap:28px;overflow:hidden;padding:8px clamp(20px,4vw,52px);max-width:1200px;margin:0 auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmer);white-space:nowrap}
+  .statusbar b{color:var(--ok);font-weight:500}
+  .statusbar .led{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ok);margin-right:7px;box-shadow:0 0 6px var(--ok);animation:pulse 2.2s infinite}
+  @keyframes pulse{50%{opacity:.4}}
+
+  /* ============ HERO ============ */
+  .hero{position:relative;border-bottom:1px solid var(--line);padding:clamp(56px,8vw,110px) 0 0;
+    background:radial-gradient(1000px 500px at 75% -10%,var(--orange-glow),transparent 60%)}
+  .hero-tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:14px;margin-bottom:30px}
+  .hero-tag::before{content:"";width:40px;height:1px;background:var(--orange)}
+  h1{font-family:var(--black);font-size:clamp(2.3rem,6.4vw,5rem);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;max-width:12em}
+  h1 .hollow{color:transparent;-webkit-text-stroke:2px var(--fog)}
+  h1 .org{color:var(--orange)}
+  .hero-sub{margin-top:28px;font-size:clamp(1rem,1.6vw,1.2rem);color:var(--dim);max-width:36em}
+  .hero-sub strong{color:var(--fog);font-weight:600}
+  .hero-ctas{margin-top:38px;display:flex;flex-wrap:wrap;border:1px solid var(--steel);width:fit-content}
+  .btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:17px 30px;transition:all .15s}
+  .btn-solid{background:var(--orange);color:var(--coal);font-weight:600}
+  .btn-solid:hover{background:var(--fog)}
+  .btn-line{border-left:1px solid var(--steel);color:var(--fog)}
+  .btn-line:hover{color:var(--orange);background:var(--coal2)}
+
+  /* production line */
+  .line-stage{margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--line);background:var(--coal2);position:relative}
+  .line-head{display:flex;justify-content:space-between;padding:14px clamp(20px,4vw,52px);max-width:1200px;margin:0 auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer)}
+  .line-head b{color:var(--orange);font-weight:500}
+  .flowline{display:block;width:100%;max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,52px) 34px}
+  .flowline svg{width:100%;height:auto;display:block;overflow:visible}
+  .node-box{fill:var(--panel);stroke:var(--steel)}
+  .node-box.hot{stroke:var(--orange)}
+  .node-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;fill:var(--fog);text-transform:uppercase}
+  .node-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;fill:var(--dimmer)}
+  .belt{stroke:var(--steel);stroke-width:1.5;fill:none}
+  .belt-dash{stroke:var(--orange);stroke-width:1.5;fill:none;stroke-dasharray:3 9;animation:belt 1.4s linear infinite}
+  @keyframes belt{to{stroke-dashoffset:-12}}
+  .dot{fill:var(--orange)}
+  .doc-out{fill:var(--fog)}
+  .stamp{font-family:var(--mono);font-size:9px;fill:var(--ok);letter-spacing:.08em}
+
+  /* ============ SECTIONS ============ */
+  section{border-bottom:1px solid var(--line);position:relative}
+  .plate{display:flex;align-items:center;gap:18px;padding:clamp(44px,6vw,76px) 0 clamp(24px,3vw,40px)}
+  .plate .no{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--coal);background:var(--orange);padding:5px 12px;font-weight:600}
+  .plate .lab{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer)}
+  h2{font-family:var(--black);font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.04;text-transform:uppercase;letter-spacing:-.005em;max-width:19em;margin-bottom:14px}
+  h2 .org{color:var(--orange)}
+  .sec-sub{color:var(--dim);max-width:42em;font-size:1rem}
+
+  /* problem — fault report */
+  .faults{margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px);border:1px solid var(--steel)}
+  .fault{display:grid;grid-template-columns:56px 130px 1fr 130px;align-items:center;border-bottom:1px solid var(--line);background:var(--panel);transition:background .15s}
+  .fault:last-child{border-bottom:0}
+  .fault:hover{background:var(--coal2)}
+  @media(max-width:860px){.fault{grid-template-columns:56px 1fr;grid-auto-rows:auto;padding:14px 0}}
+  .fault .icon{display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:var(--amber);font-size:1rem}
+  .fault .code{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--dimmer);padding:20px 0}
+  .fault .desc{padding:20px 18px}
+  .fault .desc b{display:block;font-weight:600;font-size:.98rem}
+  .fault .desc p{color:var(--dim);font-size:.88rem;margin-top:2px}
+  .fault .cost{font-family:var(--mono);font-size:.82rem;color:var(--amber);text-align:right;padding-right:22px;font-weight:500}
+  @media(max-width:860px){.fault .code,.fault .cost{padding:2px 18px 0 0;grid-column:2;text-align:left}.fault .desc{padding:2px 18px}}
+  .fault-total{display:flex;justify-content:space-between;align-items:center;background:var(--coal2);padding:18px 22px;font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
+  .fault-total b{color:var(--orange);font-size:.95rem}
+
+  /* stations */
+  .stations{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--steel);margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px)}
+  @media(max-width:1020px){.stations{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.stations{grid-template-columns:1fr}}
+  .station{background:var(--panel);padding:26px 22px;position:relative;min-height:220px;display:flex;flex-direction:column;transition:background .2s}
+  .station:hover{background:var(--coal2)}
+  .station .st-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:auto}
+  .station .st-no{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;color:var(--dimmer)}
+  .station .led{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 7px var(--ok);animation:pulse 2.2s infinite}
+  .station:nth-child(2) .led{animation-delay:.4s}.station:nth-child(3) .led{animation-delay:.8s}
+  .station:nth-child(4) .led{animation-delay:1.2s}.station:nth-child(5) .led{animation-delay:1.6s}
+  .station h3{font-family:var(--black);text-transform:uppercase;font-size:1.05rem;margin:22px 0 8px;letter-spacing:.02em}
+  .station p{color:var(--dim);font-size:.85rem}
+  .station .tag{margin-top:14px;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:var(--orange)}
+
+  /* output gauges */
+  .gauges{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--steel);margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px)}
+  @media(max-width:860px){.gauges{grid-template-columns:1fr}}
+  .gauge{background:var(--panel);padding:clamp(26px,3.4vw,44px)}
+  .gauge .g-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:10px}
+  .gauge.manual .g-label{color:var(--amber)}
+  .gauge.auto .g-label{color:var(--orange)}
+  .bar-row{margin-bottom:16px}
+  .bar-row .b-name{font-family:var(--mono);font-size:.72rem;color:var(--dim);display:flex;justify-content:space-between;margin-bottom:6px}
+  .bar{height:10px;background:var(--steel);position:relative;overflow:hidden}
+  .bar i{position:absolute;inset:0;right:auto;display:block}
+  .gauge.manual .bar i{background:var(--amber);width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+  .gauge.auto .bar i{background:var(--orange);width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1) .3s}
+  .gauge .g-total{margin-top:26px;font-family:var(--black);text-transform:uppercase;font-size:1.3rem}
+  .gauge.auto .g-total{color:var(--orange)}
+  .gauge .g-note{font-family:var(--mono);font-size:.7rem;color:var(--dimmer);margin-top:4px}
+
+  /* operator dossier */
+  .dossier{display:grid;grid-template-columns:1.2fr .8fr;gap:1px;background:var(--line);border:1px solid var(--steel);margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px)}
+  @media(max-width:860px){.dossier{grid-template-columns:1fr}}
+  .dossier .d-left{background:var(--panel);padding:clamp(26px,3.4vw,44px)}
+  .dossier .d-left p{color:var(--dim);margin-bottom:16px;font-size:1rem}
+  .dossier .d-left strong{color:var(--fog);font-weight:600}
+  .dossier .d-left .pull{font-family:var(--black);text-transform:uppercase;font-size:clamp(1.1rem,1.9vw,1.4rem);color:var(--fog);line-height:1.18;margin:6px 0 22px;border-left:3px solid var(--orange);padding-left:18px}
+  .dossier .d-right{background:var(--coal2)}
+  .dossier .d-right li{list-style:none;display:grid;grid-template-columns:96px 1fr;gap:14px;padding:19px 24px;border-bottom:1px solid var(--line);align-items:baseline}
+  .dossier .d-right li:last-child{border-bottom:0}
+  .dossier .d-right b{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--orange);text-transform:uppercase}
+  .dossier .d-right span{font-size:.88rem;color:var(--dim)}
+
+  /* work order */
+  .workorder{border:1px solid var(--orange);margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px);position:relative;background:var(--panel)}
+  .wo-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:14px 24px;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer)}
+  .wo-head b{color:var(--orange)}
+  .wo-body{display:grid;grid-template-columns:1fr 320px}
+  @media(max-width:860px){.wo-body{grid-template-columns:1fr}}
+  .wo-list{padding:clamp(24px,3vw,40px)}
+  .wo-list li{list-style:none;display:flex;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line);color:var(--dim);font-size:.94rem}
+  .wo-list li:last-child{border-bottom:0}
+  .wo-list li::before{content:"▸";color:var(--orange);font-family:var(--mono)}
+  .wo-price{border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;padding:38px 24px;text-align:center;background:radial-gradient(300px 200px at 50% 0%,var(--orange-glow),transparent)}
+  @media(max-width:860px){.wo-price{border-left:0;border-top:1px solid var(--line)}}
+  .wo-price small{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  .wo-price b{font-family:var(--black);font-size:2.6rem;color:var(--orange);line-height:1}
+  .wo-price em{font-style:normal;font-size:.82rem;color:var(--dim);max-width:15em}
+
+  /* contact */
+  .contact{padding:clamp(56px,8vw,110px) 0}
+  .contact .big{font-family:var(--black);text-transform:uppercase;font-size:clamp(1.8rem,4.2vw,3.3rem);line-height:1.05;max-width:15em}
+  .contact .big .org{color:var(--orange)}
+  .contact p{margin-top:20px;color:var(--dim);max-width:36em}
+  .contact .email{display:inline-block;margin-top:34px;font-family:var(--mono);font-size:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--orange);padding:18px 32px;color:var(--fog);letter-spacing:.02em;transition:all .15s}
+  .contact .email:hover{background:var(--orange);color:var(--coal)}
+
+  footer{border-top:1px solid var(--line);padding:20px 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)}
+  footer .in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g stroke="#e8a33d" stroke-width="12" stroke-linecap="square" fill="none"><path d="M 40 168 L 100 40 L 160 168"/><path d="M 66 108 L 134 108"/></g><circle cx="100" cy="40" r="10" fill="#e8a33d"/><circle cx="66" cy="108" r="6" fill="#e8a33d"/><circle cx="134" cy="108" r="6" fill="#e8a33d"/></svg>
+      AUTONOMEX
+    </a>
+    <div class="nav-r">
+      <a href="#faults" class="lang-de">Fehlerbericht</a><a href="#faults" class="lang-en">Fault report</a>
+      <a href="#line" class="lang-de">Die Linie</a><a href="#line" class="lang-en">The line</a>
+      <a href="#workorder" class="lang-de">Angebot</a><a href="#workorder" class="lang-en">Work order</a>
+      <a class="cta" href="mailto:info@autonomex.de"><span class="lang-de">Termin buchen</span><span class="lang-en">Book 15 min</span></a>
+      <a class="langbtn" id="langToggle">EN</a>
+    </div>
+  </div>
+</nav>
+
+<div class="statusbar">
+  <div class="in">
+    <span><span class="led"></span><span class="lang-de">ALLE SYSTEME NOMINAL</span><span class="lang-en">ALL SYSTEMS NOMINAL</span></span>
+    <span class="lang-de">LINIENSTATUS: <b>LÄUFT</b></span><span class="lang-en">LINE STATUS: <b>RUNNING</b></span>
+    <span class="lang-de">LETZTER LAUF: <b>14 MIN 32 S</b></span><span class="lang-en">LAST RUN: <b>14 MIN 32 S</b></span>
+    <span class="lang-de">QS-FLAGS: <b>GEPRÜFT</b></span><span class="lang-en">QA FLAGS: <b>RESOLVED</b></span>
+    <span class="lang-de">BRANCHE: ENERGIEBERATUNG (BAFA-GELISTET)</span><span class="lang-en">SECTOR: BAFA-LISTED ENERGY CONSULTANCIES</span>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-tag"><span class="lang-de">Berichtsfertigung — DIN EN 16247 / BAFA</span><span class="lang-en">Report manufacturing — DIN EN 16247 / BAFA</span></div>
+    <h1><span class="lang-de">Ihre Berichte,<br><span class="hollow">automatisiert</span><span class="org">.</span></span><span class="lang-en">Your reports,<br><span class="hollow">manufactured</span><span class="org">.</span></span></h1>
+    <p class="hero-sub lang-de"><strong>Aus Ihren Energiedaten wird automatisch ein BAFA-konformer DIN-EN-16247-Beratungsbericht.</strong> Ausgefüllte Excel-Vorlage rein — geprüfter Berichtsentwurf raus: Word + PDF, inklusive Sankey-Diagramm, Kennzahlen und Wirtschaftlichkeitsrechnung. Sie prüfen, Sie versenden.</p>
+    <p class="hero-sub lang-en"><strong>Your energy data becomes a BAFA-compliant DIN EN 16247 Beratungsbericht, automatically.</strong> Filled Excel template in — validated draft report out: Word + PDF, including Sankey diagram, KPIs, and measure-level economics. You review, you send.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="mailto:info@autonomex.de"><span class="lang-de">15-Min-Gespräch buchen</span><span class="lang-en">Book a 15-min call</span></a>
+      <a class="btn btn-line" href="#line"><span class="lang-de">Die Linie ansehen</span><span class="lang-en">Inspect the line</span></a>
+    </div>
+  </div>
+
+  <div class="line-stage">
+    <div class="line-head"><span class="lang-de">PRODUKTIONSLINIE — LIVE-ANSICHT</span><span class="lang-en">PRODUCTION LINE — LIVE VIEW</span><b class="lang-de">DURCHSATZ: TAGE → MINUTEN</b><b class="lang-en">THROUGHPUT: DAYS → MINUTES</b></div>
+    <div class="flowline">
+      <svg viewBox="0 0 1100 190" xmlns="http://www.w3.org/2000/svg" aria-label="Automated report production line">
+        <path class="belt" d="M95 95 H 215"/><path class="belt-dash" d="M95 95 H 215"/>
+        <path class="belt" d="M325 95 H 435"/><path class="belt-dash" d="M325 95 H 435"/>
+        <path class="belt" d="M545 95 H 655"/><path class="belt-dash" d="M545 95 H 655"/>
+        <path class="belt" d="M765 95 H 875"/><path class="belt-dash" d="M765 95 H 875"/>
+
+        <g>
+          <rect class="node-box" x="10" y="60" width="85" height="70"/>
+          <text class="node-label" x="22" y="85">RAW</text>
+          <text class="node-sub" x="22" y="102">energy .xlsx</text>
+          <text class="node-sub" x="22" y="114">invoices</text>
+          <text class="node-sub" x="22" y="126">SEUs</text>
+        </g>
+        <g>
+          <rect class="node-box hot" x="215" y="55" width="110" height="80"/>
+          <text class="node-label" x="230" y="80">01 INGEST</text>
+          <text class="node-sub" x="230" y="98">parse · validate</text>
+          <text class="node-sub" x="230" y="110">90% rule</text>
+        </g>
+        <g>
+          <rect class="node-box hot" x="435" y="55" width="110" height="80"/>
+          <text class="node-label" x="450" y="80">02 CALC</text>
+          <text class="node-sub" x="450" y="98">energy balance</text>
+          <text class="node-sub" x="450" y="110">NPV · IRR</text>
+        </g>
+        <g>
+          <rect class="node-box hot" x="655" y="55" width="110" height="80"/>
+          <text class="node-label" x="670" y="80">03 VISUALS</text>
+          <text class="node-sub" x="670" y="98">Sankey · charts</text>
+          <text class="node-sub" x="670" y="110">Pareto</text>
+        </g>
+        <g>
+          <rect class="node-box hot" x="875" y="55" width="110" height="80"/>
+          <text class="node-label" x="890" y="80">04 REPORT</text>
+          <text class="node-sub" x="890" y="98">Beratungsbericht</text>
+          <text class="node-sub" x="890" y="110">DOCX · PDF</text>
+        </g>
+        <g>
+          <path class="belt" d="M985 95 H 1030"/><path class="belt-dash" d="M985 95 H 1030"/>
+          <rect class="doc-out" x="1030" y="55" width="58" height="80" rx="2"/>
+          <rect x="1038" y="66" width="42" height="4" fill="#12161c" opacity=".75"/>
+          <rect x="1038" y="76" width="34" height="3" fill="#12161c" opacity=".45"/>
+          <rect x="1038" y="84" width="38" height="3" fill="#12161c" opacity=".45"/>
+          <rect x="1038" y="92" width="30" height="3" fill="#12161c" opacity=".45"/>
+          <rect x="1038" y="104" width="42" height="14" fill="#e8a33d"/>
+          <text class="stamp" x="1030" y="150">✓ .DOCX DRAFT</text>
+        </g>
+
+        <circle class="dot" r="5"><animateMotion dur="6s" repeatCount="indefinite" path="M95,95 H1030" keyPoints="0;1" keyTimes="0;1"/></circle>
+        <circle class="dot" r="5" opacity=".7"><animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M95,95 H1030"/></circle>
+        <circle class="dot" r="5" opacity=".45"><animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M95,95 H1030"/></circle>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="faults">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·01</span><span class="lab lang-de">Fehlerbericht — manueller Prozess erkannt</span><span class="lab lang-en">Fault report — manual process detected</span></div>
+    <div class="rv">
+      <h2><span class="lang-de">Ihr Produkt ist ein Bericht.<br>Sie bauen ihn immer noch <span class="org">von Hand.</span></span><span class="lang-en">Your billable product is a document.<br>You still <span class="org">assemble it by hand.</span></span></h2>
+      <p class="sec-sub lang-de">Jeder Energieaudit endet gleich: ein Energieberater rechnet Energiebilanz und 90%-Regel manuell, baut das Sankey-Diagramm neu, tippt Zahlen in die Word-Vorlage. In jeder Anlage wäre diese Linie längst automatisiert.</p>
+      <p class="sec-sub lang-en">Every audit engagement ends the same way: an Energieberater manually computing the energy balance and the 90% coverage rule, rebuilding the Sankey diagram, typing numbers into the Word template. In any plant, this line would have been automated years ago.</p>
+    </div>
+    <div class="faults rv">
+      <div class="fault">
+        <div class="icon">⚠</div>
+        <div class="code">FAULT / M-01</div>
+        <div class="desc">
+          <b class="lang-de">Manuelle Energiebilanz &amp; 90%-Regel</b><b class="lang-en">Manual energy balance &amp; 90% rule</b>
+          <p class="lang-de">Rechnungsdaten, SEUs und Deckungsgrad von Hand geprüft — bei jedem Audit erneut.</p>
+          <p class="lang-en">Invoice data, SEUs, and coverage checked by hand — every audit, from scratch.</p>
+        </div>
+        <div class="cost">4–6 <span class="lang-de">STD.</span><span class="lang-en">HRS</span></div>
+      </div>
+      <div class="fault">
+        <div class="icon">⚠</div>
+        <div class="code">FAULT / M-02</div>
+        <div class="desc">
+          <b class="lang-de">Sankey &amp; Diagramme neu gebaut</b><b class="lang-en">Sankey &amp; charts rebuilt from scratch</b>
+          <p class="lang-de">Energieflüsse, Kennzahlen, Maßnahmen-Pareto — identische Excel-Arbeit, pro Kunde wiederholt.</p>
+          <p class="lang-en">Energy flows, KPIs, measure Pareto — the identical Excel work, repeated per client.</p>
+        </div>
+        <div class="cost">3–4 <span class="lang-de">STD.</span><span class="lang-en">HRS</span></div>
+      </div>
+      <div class="fault">
+        <div class="icon">⚠</div>
+        <div class="code">FAULT / M-03</div>
+        <div class="desc">
+          <b class="lang-de">Copy-Paste in den Beratungsbericht</b><b class="lang-en">Copy-paste into the Beratungsbericht</b>
+          <p class="lang-de">Zahlen von Hand übertragen, NPV/IRR je Maßnahme gerechnet — plus die Fehler, die manuelle Übertragung immer bringt.</p>
+          <p class="lang-en">Numbers hand-carried in, NPV/IRR computed per measure — plus the errors manual transfer always produces.</p>
+        </div>
+        <div class="cost">4–6 <span class="lang-de">STD.</span><span class="lang-en">HRS</span></div>
+      </div>
+      <div class="fault-total">
+        <span class="lang-de">Kumulierte Ausfallzeit — pro Standort, pro Audit, für immer</span><span class="lang-en">Cumulative downtime — per site, per audit, forever</span>
+        <b class="lang-de">≈ 1–2 TAGE BERATERZEIT</b><b class="lang-en">≈ 1–2 DAYS CONSULTANT TIME</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="line">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·02</span><span class="lab lang-de">Die Linie — vier Stationen</span><span class="lab lang-en">The line — four stations</span></div>
+    <div class="rv">
+      <h2><span class="lang-de">Rohdaten rein. <span class="org">Geprüfter Entwurf raus.</span></span><span class="lang-en">Raw data in. <span class="org">Validated draft out.</span></span></h2>
+      <p class="sec-sub lang-de">Eine Produktionslinie für Berichte, jede Station überwacht, jede Auffälligkeit markiert — nichts wird stillschweigend geschätzt.</p>
+      <p class="sec-sub lang-en">A production line for reports — every station monitored, every anomaly flagged, nothing silently guessed.</p>
+    </div>
+    <div class="stations rv">
+      <div class="station">
+        <div class="st-top"><span class="st-no">STATION 01</span><span class="led"></span></div>
+        <h3 class="lang-de">Einlesen</h3><h3 class="lang-en">Ingest</h3>
+        <p class="lang-de">Liest die feste Excel-Vorlage ein — Energiedaten, SEUs, Maßnahmen, Annahmen.</p>
+        <p class="lang-en">Reads the fixed Excel template — energy data, SEUs, measures, assumptions.</p>
+        <div class="tag lang-de">▸ FESTE VORLAGE</div><div class="tag lang-en">▸ FIXED TEMPLATE</div>
+      </div>
+      <div class="station">
+        <div class="st-top"><span class="st-no">STATION 02</span><span class="led"></span></div>
+        <h3 class="lang-de">Prüfen &amp; Rechnen</h3><h3 class="lang-en">Validate &amp; Calc</h3>
+        <p class="lang-de">90%-Regel, Plausibilität, Energiebilanz, Kennzahlen, Einsparungen, NPV/IRR je Maßnahme.</p>
+        <p class="lang-en">90% rule, plausibility, energy balance, KPIs, savings, NPV/IRR per measure.</p>
+        <div class="tag lang-de">▸ NIE GESCHÄTZT</div><div class="tag lang-en">▸ NEVER GUESSED</div>
+      </div>
+      <div class="station">
+        <div class="st-top"><span class="st-no">STATION 03</span><span class="led"></span></div>
+        <h3 class="lang-de">Visualisieren</h3><h3 class="lang-en">Visuals</h3>
+        <p class="lang-de">Sankey-Diagramm, Kostenaufteilung, SEU-Pareto — berechnet, nicht halluziniert.</p>
+        <p class="lang-en">Sankey diagram, cost breakdown, SEU Pareto — calculated, not hallucinated.</p>
+        <div class="tag lang-de">▸ DETERMINISTISCH</div><div class="tag lang-en">▸ DETERMINISTIC</div>
+      </div>
+      <div class="station">
+        <div class="st-top"><span class="st-no">STATION 04</span><span class="led"></span></div>
+        <h3 class="lang-de">Bericht erstellen</h3><h3 class="lang-en">Generate report</h3>
+        <p class="lang-de">Beratungsbericht (DOCX + PDF) und Kurzfassung — Entwurf in Minuten. Sie prüfen, ergänzen, versenden.</p>
+        <p class="lang-en">Beratungsbericht (DOCX + PDF) and executive summary — draft in minutes. You review, finish, ship.</p>
+        <div class="tag lang-de">▸ ENTWURF IN MINUTEN</div><div class="tag lang-en">▸ MINUTES, NOT DAYS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="output">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·03</span><span class="lab lang-de">Vergleich — gleicher Bericht, zwei Prozesse</span><span class="lab lang-en">Output comparison — same report, two processes</span></div>
+    <div class="gauges rv" id="gaugeblock">
+      <div class="gauge manual">
+        <div class="g-label">⚠ <span class="lang-de">Manueller Prozess</span><span class="lang-en">Manual process</span></div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">DATENPRÜFUNG</span><span class="lang-en">DATA VALIDATION</span><span>4 h</span></div><div class="bar"><i data-w="80%"></i></div></div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">DIAGRAMME &amp; TABELLEN</span><span class="lang-en">CHARTS &amp; TABLES</span><span>3.5 h</span></div><div class="bar"><i data-w="70%"></i></div></div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">TEXT &amp; ÜBERTRAGUNG</span><span class="lang-en">WRITE-UP &amp; TRANSFER</span><span>5 h</span></div><div class="bar"><i data-w="100%"></i></div></div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">FEHLERKORREKTUR</span><span class="lang-en">ERROR FIXING</span><span>1.5 h</span></div><div class="bar"><i data-w="30%"></i></div></div>
+        <div class="g-total lang-de">≈ 1–2 Tage</div><div class="g-total lang-en">≈ 1–2 days</div>
+        <div class="g-note lang-de">BERATERZEIT, VERBRAUCHT</div><div class="g-note lang-en">CONSULTANT TIME, CONSUMED</div>
+      </div>
+      <div class="gauge auto">
+        <div class="g-label">▸ Autonomex</div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">DATEI-UPLOAD</span><span class="lang-en">FILE DROP</span><span>2 min</span></div><div class="bar"><i data-w="4%"></i></div></div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">ENGINE-LAUF</span><span class="lang-en">ENGINE RUN</span><span>~5 min</span></div><div class="bar"><i data-w="8%"></i></div></div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">PRÜFUNG</span><span class="lang-en">REVIEW</span><span>1 h</span></div><div class="bar"><i data-w="30%"></i></div></div>
+        <div class="bar-row"><div class="b-name"><span class="lang-de">FACHLICHE BEURTEILUNG</span><span class="lang-en">EXPERT JUDGMENT</span><span>2 h</span></div><div class="bar"><i data-w="55%"></i></div></div>
+        <div class="g-total lang-de">≈ Halber Tag</div><div class="g-total lang-en">≈ Half a day</div>
+        <div class="g-note lang-de">FACHZEIT GEHT IN BEURTEILUNG, NICHT FORMATIERUNG</div><div class="g-note lang-en">EXPERT TIME GOES TO JUDGMENT, NOT FORMATTING</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="operator">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·04</span><span class="lab lang-de">Betreiberprofil</span><span class="lab lang-en">Operator profile</span></div>
+    <div class="dossier rv">
+      <div class="d-left">
+        <div class="pull lang-de">Gebaut von jemandem, der diese Berichte selbst produziert hat — kein Chatbot-Wrapper.</div>
+        <div class="pull lang-en">Built by someone who has produced these reports — not a chatbot wrapper.</div>
+        <p class="lang-de">Ich habe <strong>zehn Jahre in der LNG-Betriebsführung</strong> gearbeitet, in Ägypten und Angola, und dabei die Felddaten produziert, die am Ende in Energieberichten landen. Ich weiß, was eine kWh-Baseline ist, worauf Prüfer achten, und welche Fehler unverzeihlich sind — weil ich auf der anderen Seite davon gestanden habe.</p>
+        <p class="lang-en">I spent <strong>ten years in LNG operations</strong>, in Egypt and Angola, producing the field data that ends up in energy reports. I know what a kWh baseline is, what auditors check, and which mistakes are unforgivable — because I've lived on the other side of them.</p>
+        <p class="lang-de">Danach habe ich <strong>Energiewirtschaft an der TU Berlin</strong> studiert und mich zum <strong>Datenautomatisierer</strong> weitergebildet. Die Engine ist domänenbewusst gebaut: geprüfte Zahlen, Ihre Vorlage, Flags statt Halluzinationen.</p>
+        <p class="lang-en">Then I studied <strong>energy economics at TU Berlin</strong> and retrained in <strong>data automation</strong>. The engine is domain-aware: validated numbers, your template, flags instead of hallucinations.</p>
+        <p class="lang-de">Läuft lokal von Ihrer Excel-Vorlage — <strong>Ihre Kundendaten trainieren kein Modell.</strong></p>
+        <p class="lang-en">Runs locally from your Excel template — <strong>your client data never trains any model.</strong></p>
+      </div>
+      <ul class="d-right">
+        <li><b>OPS</b><span class="lang-de">10 Jahre LNG-Betrieb — Ägypten &amp; Angola</span><span class="lang-en">10 years LNG operations — Egypt &amp; Angola</span></li>
+        <li><b>ECON</b><span class="lang-de">M.Sc. Energietechnik &amp; -wirtschaft, TU Berlin</span><span class="lang-en">M.Sc. Energy Engineering &amp; Economics, TU Berlin</span></li>
+        <li><b>DATA</b><span class="lang-de">Python · Datenautomatisierung</span><span class="lang-en">Python · Data Automation</span></li>
+        <li><b>LANG</b><span class="lang-de">Deutsch / Englisch — ansässig in Karlsruhe</span><span class="lang-en">German / English — based in Karlsruhe, Germany</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="workorder">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·05</span><span class="lab lang-de">Angebot — Design-Partner-Pilot</span><span class="lab lang-en">Work order — design-partner pilot</span></div>
+    <div class="rv"><h2><span class="lang-de">Ein Bericht. Ihre echten Daten. <span class="org">Ehrliches Feedback.</span></span><span class="lang-en">One report. Your real data. <span class="org">Honest feedback.</span></span></h2></div>
+    <div class="workorder rv">
+      <div class="wo-head"><span class="lang-de">AUFTRAG Nº <b>001</b></span><span class="lang-en">WORK ORDER Nº <b>001</b></span><span class="lang-de">DURCHLAUFZEIT: <b>MINUTEN</b></span><span class="lang-en">LEAD TIME: <b>MINUTES</b></span></div>
+      <div class="wo-body">
+        <ul class="wo-list">
+          <li class="lang-de">Ihre echten (oder anonymisierten) Auditdaten durch die Engine</li><li class="lang-en">Your real (or anonymized) audit data through the engine</li>
+          <li class="lang-de">Fertiger Beratungsbericht — Word + PDF, inkl. Sankey &amp; Kennzahlen</li><li class="lang-en">Finished Beratungsbericht — Word + PDF, incl. Sankey &amp; KPIs</li>
+          <li class="lang-de">Sie prüfen — Feedback zu allem, was fehlt oder nicht stimmt</li><li class="lang-en">You review — feedback on anything missing or wrong</li>
+          <li class="lang-de">Basis-Tarif danach: €300–500 je Bericht oder €900–1.500/Jahr</li><li class="lang-en">Basic-tier pricing after: €300–500 per report or €900–1,500/year</li>
+        </ul>
+        <div class="wo-price">
+          <small class="lang-de">Pilotpreis — Basis-Tarif</small><small class="lang-en">Pilot price — Basic tier</small>
+          <b>€300–500</b>
+          <em class="lang-de">Amortisiert sich am ersten erstellten Bericht.</em>
+          <em class="lang-en">Pays for itself on the first report it produces.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" style="border-bottom:0">
+  <div class="wrap rv">
+    <div class="plate" style="padding-top:0"><span class="no">STA·06</span><span class="lab lang-de">Anfrage stellen</span><span class="lab lang-en">Open a job ticket</span></div>
+    <div class="big"><span class="lang-de">Fünfzehn Minuten zeigen, <span class="org">ob das passt.</span></span><span class="lang-en">Fifteen minutes tells you <span class="org">if this fits.</span></span></div>
+    <p class="lang-de">Schicken Sie eine kürzlich erstellte Beratungsbericht-Vorlage und ein Beispiel Ihrer Auditdaten. Ich zeige genau, was automatisiert werden kann — und was nicht.</p>
+    <p class="lang-en">Send a recent Beratungsbericht template and a sample of your audit data. I'll show you exactly what can be automated — and what shouldn't be.</p>
+    <a class="email" href="mailto:info@autonomex.de">▸ info@autonomex.de</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap in">
+    <span>AUTONOMEX — <span class="lang-de">Beratungsberichte. Automatisiert.</span><span class="lang-en">Advisory Reports. Automated.</span></span>
+    <span>Karlsruhe, DE · DE / EN</span>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.bar i').forEach(b=>{b.style.width=b.dataset.w});
+      io.unobserve(e.target);
+    }
+  }),{threshold:.15});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+  const langBtn = document.getElementById('langToggle');
+  function setLang(lang){
+    document.body.classList.toggle('en', lang === 'en');
+    document.documentElement.lang = lang;
+    langBtn.textContent = lang === 'en' ? 'DE' : 'EN';
+    try{ localStorage.setItem('autonomex-lang', lang); }catch(e){}
+  }
+  let saved = 'de';
+  try{ saved = localStorage.getItem('autonomex-lang') || 'de'; }catch(e){}
+  setLang(saved);
+  langBtn.addEventListener('click', ()=> setLang(document.body.classList.contains('en') ? 'de' : 'en'));
+</script>
+</body>
+</html>
