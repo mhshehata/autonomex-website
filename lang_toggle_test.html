@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Toggle test</title>
+<style>
+  body{font-family:sans-serif;padding:40px;background:#fff;color:#000}
+  .lang-en{display:none}
+  body.lang-en .lang-en{display:initial}
+  body.lang-en .lang-de{display:none}
+  button{font-size:18px;padding:10px 20px;margin-bottom:20px}
+</style>
+</head>
+<body>
+  <button id="langToggle" type="button">Switch to EN</button>
+  <p class="lang-de">Das ist Deutsch.</p>
+  <p class="lang-en">This is English.</p>
+
+  <script>
+    const btn = document.getElementById('langToggle');
+    btn.addEventListener('click', function(ev){
+      ev.preventDefault();
+      document.body.classList.toggle('lang-en');
+      btn.textContent = document.body.classList.contains('lang-en') ? 'Switch to DE' : 'Switch to EN';
+    });
+  </script>
+</body>
+</html>
