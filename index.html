@@ -5,13 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Autonomex — Beratungsberichte. Automatisiert.</title>
 <meta name="description" content="Automatisierte DIN-EN-16247/BAFA-Beratungsberichte für deutsche Energieberatungen — Entwurf in Minuten statt Tagen. Automated DIN EN 16247/BAFA advisory reports for German energy consultancies.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Fonts served from this domain — no third-party request, no IP sent to Google.
+     LG Muenchen I, 20.01.2022, Az. 3 O 17493/20. */
+  @font-face{font-family:'Archivo';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/archivo-latin-400-normal.woff2) format('woff2')}
+  @font-face{font-family:'Archivo';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/archivo-latin-500-normal.woff2) format('woff2')}
+  @font-face{font-family:'Archivo';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/archivo-latin-600-normal.woff2) format('woff2')}
+  @font-face{font-family:'Archivo';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/archivo-latin-700-normal.woff2) format('woff2')}
+  @font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/archivo-black-latin-400-normal.woff2) format('woff2')}
+  @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2')}
+  @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2')}
+  @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-latin-600-normal.woff2) format('woff2')}
   :root{
     --coal:#12161c; --coal2:#1c222b; --panel:#191f27; --steel:#2f3742; --line:#293039;
-    --fog:#f2f0ea; --dim:#8a93a3; --dimmer:#5a6270;
+    --fog:#f2f0ea; --dim:#8a93a3; --dimmer:#868f9e;
     --orange:#e8a33d; --orange-glow:rgba(232,163,61,.16); --amber:#e8a33d; --ok:#5abf8a;
     --black:'Archivo Black',sans-serif; --sans:'Archivo',sans-serif; --mono:'IBM Plex Mono',monospace;
   }
@@ -78,7 +85,7 @@
   .node-box{fill:var(--panel);stroke:var(--steel)}
   .node-box.hot{stroke:var(--orange)}
   .node-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;fill:var(--fog);text-transform:uppercase}
-  .node-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;fill:var(--dimmer)}
+  .node-sub{font-family:var(--mono);font-size:9px;letter-spacing:.06em;fill:var(--dimmer)}
   .belt{stroke:var(--steel);stroke-width:1.5;fill:none}
   .belt-dash{stroke:var(--orange);stroke-width:1.5;fill:none;stroke-dasharray:3 9;animation:belt 1.4s linear infinite}
   @keyframes belt{to{stroke-dashoffset:-12}}
@@ -181,6 +188,7 @@
   .contact .email:hover{background:var(--orange);color:var(--coal)}
 
   footer{border-top:1px solid var(--line);padding:20px 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)}
+  footer a{color:var(--dim)}footer a:hover{color:var(--orange)}
   footer .in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
   .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
@@ -199,7 +207,7 @@
       <a href="#faults" class="lang-de">Fehlerbericht</a><a href="#faults" class="lang-en">Fault report</a>
       <a href="#line" class="lang-de">Die Linie</a><a href="#line" class="lang-en">The line</a>
       <a href="#workorder" class="lang-de">Angebot</a><a href="#workorder" class="lang-en">Work order</a>
-      <a class="cta" href="mailto:info@autonomex.de"><span class="lang-de">Termin buchen</span><span class="lang-en">Book 15 min</span></a>
+      <a class="cta" href="mailto:info@autonomex.de"><span class="lang-de">Bericht anfordern</span><span class="lang-en">Get a report</span></a>
       <a class="langbtn" id="langToggle">EN</a>
     </div>
   </div>
@@ -209,7 +217,7 @@
   <div class="in">
     <span><span class="led"></span><span class="lang-de">ALLE SYSTEME NOMINAL</span><span class="lang-en">ALL SYSTEMS NOMINAL</span></span>
     <span class="lang-de">LINIENSTATUS: <b>LÄUFT</b></span><span class="lang-en">LINE STATUS: <b>RUNNING</b></span>
-    <span class="lang-de">LETZTER LAUF: <b>14 MIN 32 S</b></span><span class="lang-en">LAST RUN: <b>14 MIN 32 S</b></span>
+    <span class="lang-de">AUSGABE: <b>WORD + PDF</b></span><span class="lang-en">OUTPUT: <b>WORD + PDF</b></span>
     <span class="lang-de">QS-FLAGS: <b>GEPRÜFT</b></span><span class="lang-en">QA FLAGS: <b>RESOLVED</b></span>
     <span class="lang-de">BRANCHE: ENERGIEBERATUNG (BAFA-GELISTET)</span><span class="lang-en">SECTOR: BAFA-LISTED ENERGY CONSULTANCIES</span>
   </div>
@@ -218,30 +226,30 @@
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-tag"><span class="lang-de">Berichtsfertigung — DIN EN 16247 / BAFA</span><span class="lang-en">Report manufacturing — DIN EN 16247 / BAFA</span></div>
-    <h1><span class="lang-de">Ihre Berichte,<br><span class="hollow">automatisiert</span><span class="org">.</span></span><span class="lang-en">Your reports,<br><span class="hollow">manufactured</span><span class="org">.</span></span></h1>
+    <h1><span class="lang-de">Ihre Berichte,<br><span class="hollow">geliefert</span><span class="org">.</span></span><span class="lang-en">Your reports,<br><span class="hollow">manufactured</span><span class="org">.</span></span></h1>
     <p class="hero-sub lang-de"><strong>Aus Ihren Rohdaten wird ein einreichfertiger DIN-EN-16247-Beratungsbericht.</strong> Rechnungen, Zählerdaten, Ihre Notizen und Fotos — in dem Zustand, in dem sie sind. Zurück kommt der fertige Bericht: Word + PDF, inklusive Sankey-Diagramm, Kennzahlen und Wirtschaftlichkeitsrechnung. Sie prüfen, Sie versenden.</p>
     <p class="hero-sub lang-en"><strong>Your raw data becomes a submission-ready DIN EN 16247 Beratungsbericht.</strong> Invoices, meter exports, your notes and photos — in whatever state they are already in. Back comes the finished report: Word + PDF, including Sankey diagram, KPIs, and measure-level economics. You review, you send.</p>
     <div class="hero-ctas">
-      <a class="btn btn-solid" href="mailto:info@autonomex.de"><span class="lang-de">15-Min-Gespräch buchen</span><span class="lang-en">Book a 15-min call</span></a>
+      <a class="btn btn-solid" href="mailto:info@autonomex.de"><span class="lang-de">Ersten Bericht anfordern</span><span class="lang-en">Get your first report</span></a>
       <a class="btn btn-line" href="#line"><span class="lang-de">Die Linie ansehen</span><span class="lang-en">Inspect the line</span></a>
     </div>
   </div>
 
   <div class="line-stage">
-    <div class="line-head"><span class="lang-de">PRODUKTIONSLINIE — LIVE-ANSICHT</span><span class="lang-en">PRODUCTION LINE — LIVE VIEW</span><b class="lang-de">DURCHSATZ: TAGE → MINUTEN</b><b class="lang-en">THROUGHPUT: DAYS → MINUTES</b></div>
+    <div class="line-head"><span class="lang-de">PRODUKTIONSLINIE — LIVE-ANSICHT</span><span class="lang-en">PRODUCTION LINE — LIVE VIEW</span><b class="lang-de">ENGINE-LAUF: MINUTEN</b><b class="lang-en">ENGINE RUN: MINUTES</b></div>
     <div class="flowline">
       <svg viewBox="0 0 1100 190" xmlns="http://www.w3.org/2000/svg" aria-label="Automated report production line">
-        <path class="belt" d="M95 95 H 215"/><path class="belt-dash" d="M95 95 H 215"/>
+        <path class="belt" d="M110 95 H 215"/><path class="belt-dash" d="M110 95 H 215"/>
         <path class="belt" d="M325 95 H 435"/><path class="belt-dash" d="M325 95 H 435"/>
         <path class="belt" d="M545 95 H 655"/><path class="belt-dash" d="M545 95 H 655"/>
         <path class="belt" d="M765 95 H 875"/><path class="belt-dash" d="M765 95 H 875"/>
 
         <g>
-          <rect class="node-box" x="10" y="60" width="85" height="70"/>
+          <rect class="node-box" x="10" y="60" width="100" height="70"/>
           <text class="node-label" x="22" y="85">RAW</text>
-          <text class="node-sub" x="22" y="102">energy .xlsx</text>
-          <text class="node-sub" x="22" y="114">invoices</text>
-          <text class="node-sub" x="22" y="126">SEUs</text>
+          <text class="node-sub" x="22" y="102">invoices</text>
+          <text class="node-sub" x="22" y="114">meter data</text>
+          <text class="node-sub" x="22" y="126">notes · photos</text>
         </g>
         <g>
           <rect class="node-box hot" x="215" y="55" width="110" height="80"/>
@@ -278,9 +286,9 @@
           <text class="stamp" x="1030" y="150">✓ .DOCX DRAFT</text>
         </g>
 
-        <circle class="dot" r="5"><animateMotion dur="6s" repeatCount="indefinite" path="M95,95 H1030" keyPoints="0;1" keyTimes="0;1"/></circle>
-        <circle class="dot" r="5" opacity=".7"><animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M95,95 H1030"/></circle>
-        <circle class="dot" r="5" opacity=".45"><animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M95,95 H1030"/></circle>
+        <circle class="dot" r="5"><animateMotion dur="6s" repeatCount="indefinite" path="M110,95 H1030" keyPoints="0;1" keyTimes="0;1"/></circle>
+        <circle class="dot" r="5" opacity=".7"><animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M110,95 H1030"/></circle>
+        <circle class="dot" r="5" opacity=".45"><animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M110,95 H1030"/></circle>
       </svg>
     </div>
   </div>
@@ -451,9 +459,9 @@
 <section class="contact" id="contact" style="border-bottom:0">
   <div class="wrap rv">
     <div class="plate" style="padding-top:0"><span class="no">STA·06</span><span class="lab lang-de">Anfrage stellen</span><span class="lab lang-en">Open a job ticket</span></div>
-    <div class="big"><span class="lang-de">Fünfzehn Minuten zeigen, <span class="org">ob das passt.</span></span><span class="lang-en">Fifteen minutes tells you <span class="org">if this fits.</span></span></div>
-    <p class="lang-de">Schicken Sie eine kürzlich erstellte Beratungsbericht-Vorlage und ein Beispiel Ihrer Auditdaten. Ich zeige genau, was automatisiert werden kann — und was nicht.</p>
-    <p class="lang-en">Send a recent Beratungsbericht template and a sample of your audit data. I'll show you exactly what can be automated — and what shouldn't be.</p>
+    <div class="big"><span class="lang-de">Ein Bericht zeigt, <span class="org">ob das passt.</span></span><span class="lang-en">One report tells you <span class="org">if this fits.</span></span></div>
+    <p class="lang-de">Schicken Sie die Rohdaten eines kürzlich abgeschlossenen Audits — Rechnungen, Zählerdaten, Ihre Notizen und Fotos. Sie bekommen den fertigen Beratungsbericht zurück.</p>
+    <p class="lang-en">Send the raw material from one recent audit — invoices, meter exports, your notes and photos. You get the finished Beratungsbericht back.</p>
     <a class="email" href="mailto:info@autonomex.de">▸ info@autonomex.de</a>
   </div>
 </section>
@@ -461,7 +469,7 @@
 <footer>
   <div class="wrap in">
     <span>AUTONOMEX — <span class="lang-de">Beratungsberichte. Automatisiert.</span><span class="lang-en">Advisory Reports. Automated.</span></span>
-    <span>Karlsruhe, DE · DE / EN</span>
+    <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · Karlsruhe, DE</span>
   </div>
 </footer>
 
