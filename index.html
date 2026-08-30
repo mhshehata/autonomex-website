@@ -64,9 +64,22 @@
   h1 .org{color:var(--orange)}
   .hero-sub{margin-top:28px;font-size:clamp(1rem,1.6vw,1.2rem);color:var(--dim);max-width:36em}
   .hero-sub strong{color:var(--fog);font-weight:600}
-  .hero-scarcity{margin-top:22px;display:inline-block;border-left:2px solid var(--orange);background:var(--orange-glow);
-    padding:12px 18px;font-family:var(--mono);font-size:clamp(.82rem,1.1vw,.95rem);letter-spacing:.04em;color:var(--fog)}
-  .hero-scarcity strong{color:var(--orange);font-weight:600;font-size:1.08em}
+  .hero-scarcity{margin-top:22px;display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;
+    border:1px solid var(--orange);border-left-width:3px;background:var(--orange-glow);
+    padding:13px 20px;font-family:var(--mono);font-size:clamp(.82rem,1.1vw,.95rem);letter-spacing:.04em;color:var(--fog)}
+  /* FREE — solid chip, slow breathing glow */
+  .tag-free{background:var(--orange);color:var(--coal);font-weight:700;padding:5px 11px;letter-spacing:.1em;
+    text-transform:uppercase;animation:freepulse 2.6s ease-in-out infinite}
+  @keyframes freepulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(232,163,61,.55)}
+    50%{box-shadow:0 0 0 9px rgba(232,163,61,0)}}
+  /* FIVE — counter chip with a live dot */
+  .tag-five{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--orange);color:var(--orange);
+    font-weight:600;padding:4px 11px;letter-spacing:.08em;text-transform:uppercase}
+  .tag-five::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange);
+    animation:blip 1.8s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.7)}}
+  @media(prefers-reduced-motion:reduce){.tag-free,.tag-five::before{animation:none}}
   .hero-ctas{margin-top:38px;display:flex;flex-wrap:wrap;border:1px solid var(--steel);width:fit-content}
   .btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:17px 30px;transition:all .15s}
   .btn-solid{background:var(--orange);color:var(--coal);font-weight:600}
@@ -141,6 +154,16 @@
   .authorship p{color:var(--dim);max-width:44em;font-size:.98rem}
   .authorship p strong{color:var(--fog);font-weight:600}
 
+  /* credentials */
+  .creds{border-left:2px solid var(--orange);padding:clamp(20px,2.5vw,28px) 0 clamp(20px,2.5vw,28px) clamp(20px,2.5vw,30px);
+    margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px)}
+  .creds p{color:var(--dim);max-width:44em;font-size:1rem}
+  .creds p strong{color:var(--fog);font-weight:600}
+  .credlist{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0;padding:0}
+  .credlist li{list-style:none;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--fog);border:1px solid var(--steel);padding:8px 13px;background:var(--panel)}
+  .creds-note{margin-top:20px;font-size:.9rem}
+
   /* output gauges */
   .gauges{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--steel);margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px)}
   @media(max-width:860px){.gauges{grid-template-columns:1fr}}
@@ -152,7 +175,7 @@
   .bar-row .b-name{font-family:var(--mono);font-size:.72rem;color:var(--dim);display:flex;justify-content:space-between;margin-bottom:6px}
   .bar{height:10px;background:var(--steel);position:relative;overflow:hidden}
   .bar i{position:absolute;inset:0;right:auto;display:block}
-  .gauge.manual .bar i{background:var(--amber);width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+  .gauge.manual .bar i{background:#6b7684;width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
   .gauge.auto .bar i{background:var(--orange);width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1) .3s}
   .gauge .g-total{margin-top:26px;font-family:var(--black);text-transform:uppercase;font-size:1.3rem}
   .gauge.auto .g-total{color:var(--orange)}
@@ -231,9 +254,10 @@
     <p class="hero-sub lang-en"><strong>Send your audit files</strong> — invoices, meter data, your notes, however messy. Back comes a finished DIN EN 16247 Beratungsbericht. You review it, you sign it, you send it.</p>
     <div class="hero-ctas">
       <a class="btn btn-solid" href="mailto:info@autonomex.de"><span class="lang-de">Ersten Bericht anfordern</span><span class="lang-en">Get your first report</span></a>
-      <a class="btn btn-line" href="#workorder"><span class="lang-de">Was es kostet</span><span class="lang-en">What it costs</span></a>
     </div>
-    <p class="hero-scarcity"><span class="lang-de">Erster Bericht <strong>kostenlos</strong> — für die ersten fünf Kunden. Danach €290 je Bericht.</span><span class="lang-en">First report <strong>free</strong> — for the first five clients. Then €290 per report.</span></p>
+    <p class="hero-scarcity">
+      <span class="lang-de"><b class="tag-free">Kostenlos</b> <b class="tag-five">Nur 5 Plätze</b> Erster Bericht gratis — danach €290 je Bericht.</span><span class="lang-en"><b class="tag-free">Free</b> <b class="tag-five">Only 5 places</b> First report on us — then €290 per report.</span>
+    </p>
   </div>
 
   <div class="line-stage">
@@ -369,24 +393,18 @@
 
 <section id="operator">
   <div class="wrap">
-    <div class="plate rv"><span class="no">STA·03</span><span class="lab lang-de">Betreiberprofil</span><span class="lab lang-en">Operator profile</span></div>
-    <div class="dossier rv">
-      <div class="d-left">
-        <div class="pull lang-de">Gebaut von jemandem, der diese Berichte selbst produziert hat — kein Chatbot-Wrapper.</div>
-        <div class="pull lang-en">Built by someone who has produced these reports — not a chatbot wrapper.</div>
-        <p class="lang-de">Ich habe <strong>zehn Jahre in der LNG-Betriebsführung</strong> gearbeitet, in Ägypten und Angola, und dabei die Felddaten produziert, die am Ende in Energieberichten landen. Ich weiß, was eine kWh-Baseline ist, worauf Prüfer achten, und welche Fehler unverzeihlich sind — weil ich auf der anderen Seite davon gestanden habe.</p>
-        <p class="lang-en">I spent <strong>ten years in LNG operations</strong>, in Egypt and Angola, producing the field data that ends up in energy reports. I know what a kWh baseline is, what auditors check, and which mistakes are unforgivable — because I've lived on the other side of them.</p>
-        <p class="lang-de">Danach habe ich <strong>Energiewirtschaft an der TU Berlin</strong> studiert und mich zum <strong>Datenautomatisierer</strong> weitergebildet. Die Engine ist domänenbewusst gebaut: geprüfte Zahlen, Ihre Vorlage, Flags statt Halluzinationen.</p>
-        <p class="lang-en">Then I studied <strong>energy economics at TU Berlin</strong> and retrained in <strong>data automation</strong>. The engine is domain-aware: validated numbers, your template, flags instead of hallucinations.</p>
-        <p class="lang-de">Die Verarbeitung läuft lokal — <strong>Ihre Kundendaten trainieren kein Modell.</strong></p>
-        <p class="lang-en">Processing runs locally — <strong>your client data never trains any model.</strong></p>
-      </div>
-      <ul class="d-right">
-        <li><b>OPS</b><span class="lang-de">10 Jahre LNG-Betrieb — Ägypten &amp; Angola</span><span class="lang-en">10 years LNG operations — Egypt &amp; Angola</span></li>
-        <li><b>ECON</b><span class="lang-de">M.Sc. Energietechnik &amp; -wirtschaft, TU Berlin</span><span class="lang-en">M.Sc. Energy Engineering &amp; Economics, TU Berlin</span></li>
-        <li><b>DATA</b><span class="lang-de">Python · Datenautomatisierung</span><span class="lang-en">Python · Data Automation</span></li>
-        <li><b>LANG</b><span class="lang-de">Deutsch / Englisch — ansässig in Karlsruhe</span><span class="lang-en">German / English — based in Karlsruhe, Germany</span></li>
+    <div class="plate rv"><span class="no">STA·03</span><span class="lab lang-de">Wer den Bericht baut</span><span class="lab lang-en">Who builds the report</span></div>
+    <div class="creds rv">
+      <p class="lang-de">Autonomex wird von einem Ingenieur mit <strong>zehn Jahren Betriebserfahrung in der Energiewirtschaft</strong> betrieben. Kein Chatbot-Wrapper, kein Textgenerator — eine geprüfte Rechenkette, davor jemand, der weiß, was eine kWh-Baseline ist und worauf Prüfer achten.</p>
+      <p class="lang-en">Autonomex is run by an engineer with <strong>ten years of operational experience in the energy industry</strong>. Not a chatbot wrapper, not a text generator — a validated calculation chain, with someone in front of it who knows what a kWh baseline is and what auditors check.</p>
+      <ul class="credlist">
+        <li><span class="lang-de">10 J. Betrieb — Energiewirtschaft</span><span class="lang-en">10 yrs operations — energy industry</span></li>
+        <li><span class="lang-de">M.Sc. Energietechnik &amp; -wirtschaft, TU Berlin</span><span class="lang-en">M.Sc. Energy Engineering &amp; Economics, TU Berlin</span></li>
+        <li><span class="lang-de">Python · Datenautomatisierung</span><span class="lang-en">Python · data automation</span></li>
+        <li><span class="lang-de">Deutsch / Englisch</span><span class="lang-en">German / English</span></li>
       </ul>
+      <p class="creds-note lang-de">Die Verarbeitung läuft lokal — <strong>Ihre Kundendaten trainieren kein Modell.</strong></p>
+      <p class="creds-note lang-en">Processing runs locally — <strong>your client data never trains any model.</strong></p>
     </div>
   </div>
 </section>
@@ -395,9 +413,9 @@
   <div class="wrap">
     <div class="plate rv"><span class="no">STA·04</span><span class="lab lang-de">Zuständigkeiten</span><span class="lab lang-en">Who does what</span></div>
     <div class="authorship rv">
-      <div class="big"><span class="lang-de">Sie machen das Audit.<br>Ich mache die <span class="org">Schreibarbeit.</span></span><span class="lang-en">You do the audit.<br>I do the <span class="org">paperwork.</span></span></div>
-      <p class="lang-de"><strong>Ich bin kein Energieberater und führe keine Audits durch.</strong> Ich erfinde keine Maßnahme, keine Einsparung, keine Annahme — jede Zahl im Bericht ist eine Zahl von Ihnen. Wo etwas fehlt oder nicht aufgeht, bekommen Sie eine Rückfrage, keine Vermutung. <strong>Ihr Name steht auf dem Bericht. Also bleibt jede fachliche Entscheidung Ihre.</strong></p>
-      <p class="lang-en"><strong>I'm not an Energieberater and I don't audit anything.</strong> I never invent a measure, a saving or an assumption — every number in the report is one you gave me. Where something is missing or doesn't add up, you get a question, never a guess. <strong>Your name goes on the report. So every judgement in it stays yours.</strong></p>
+      <div class="big"><span class="lang-de">Sie machen das Audit.<br>Wir machen die <span class="org">Schreibarbeit.</span></span><span class="lang-en">You do the audit.<br>We do the <span class="org">paperwork.</span></span></div>
+      <p class="lang-de"><strong>Wir sind keine Energieberater und führen keine Audits durch.</strong> Wir erfinden keine Maßnahme, keine Einsparung, keine Annahme — jede Zahl im Bericht ist eine Zahl von Ihnen. Wo etwas fehlt oder nicht aufgeht, bekommen Sie eine Rückfrage, keine Vermutung. <strong>Ihr Name steht auf dem Bericht. Also bleibt jede fachliche Entscheidung Ihre.</strong></p>
+      <p class="lang-en"><strong>We are not Energieberater and we don't audit anything.</strong> We never invent a measure, a saving or an assumption — every number in the report is one you gave us. Where something is missing or doesn't add up, you get a question, never a guess. <strong>Your name goes on the report. So every judgement in it stays yours.</strong></p>
     </div>
   </div>
 </section>
@@ -405,13 +423,13 @@
 <section id="workorder">
   <div class="wrap">
     <div class="plate rv"><span class="no">STA·05</span><span class="lab lang-de">Angebot — Design-Partner-Pilot</span><span class="lab lang-en">Work order — design-partner pilot</span></div>
-    <div class="rv"><h2><span class="lang-de">Der erste Bericht geht <span class="org">auf mich.</span></span><span class="lang-en">The first report is <span class="org">on me.</span></span></h2></div>
+    <div class="rv"><h2><span class="lang-de">Der erste Bericht geht <span class="org">auf uns.</span></span><span class="lang-en">The first report is <span class="org">on us.</span></span></h2></div>
     <div class="workorder rv">
       <div class="wo-head"><span class="lang-de">AUFTRAG Nº <b>001</b></span><span class="lang-en">WORK ORDER Nº <b>001</b></span><span class="lang-de">DURCHLAUFZEIT: <b>48 STUNDEN</b></span><span class="lang-en">LEAD TIME: <b>48 HOURS</b></span></div>
       <div class="wo-body">
         <ul class="wo-list">
           <li class="lang-de"><strong>Sie schicken die Unterlagen</strong> — an einem echten, laufenden Audit. Egal wie unsortiert.</li><li class="lang-en"><strong>You send the files</strong> — from a real audit you are running now. However messy.</li>
-          <li class="lang-de"><strong>Ich baue den Bericht</strong> — fertiger Beratungsbericht, Word + PDF, inkl. Sankey, Kennzahlen und Prüfprotokoll.</li><li class="lang-en"><strong>I build the report</strong> — finished Beratungsbericht, Word + PDF, incl. Sankey, KPIs and Prüfprotokoll.</li>
+          <li class="lang-de"><strong>Wir bauen den Bericht</strong> — fertiger Beratungsbericht, Word + PDF, inkl. Sankey, Kennzahlen und Prüfprotokoll.</li><li class="lang-en"><strong>We build the report</strong> — finished Beratungsbericht, Word + PDF, incl. Sankey, KPIs and Prüfprotokoll.</li>
           <li class="lang-de"><strong>Sie prüfen, unterschreiben, versenden</strong> — in 48 Stunden zurück bei Ihnen.</li><li class="lang-en"><strong>You review, sign, send</strong> — back with you inside 48 hours.</li>
           <li class="lang-de">Danach <strong>€290 je Bericht</strong>. Keine Lizenz, kein Abo, keine Mindestabnahme.</li><li class="lang-en">Then <strong>€290 per report</strong>. No licence, no subscription, no minimum.</li>
         </ul>
