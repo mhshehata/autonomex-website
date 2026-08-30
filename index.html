@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#12161c">
 <title>Autonomex — Beratungsberichte. Automatisiert.</title>
 <meta name="description" content="Automatisierte DIN-EN-16247/BAFA-Beratungsberichte für deutsche Energieberatungen — Entwurf in Minuten statt Tagen. Automated DIN EN 16247/BAFA advisory reports for German energy consultancies.">
 <style>
@@ -237,7 +242,6 @@
     background:none;border:1px solid var(--steel);color:var(--dim);padding:0 20px;transition:all .15s}
   .copybtn:hover{border-color:var(--orange);color:var(--orange)}
   .copybtn.done{border-color:var(--ok);color:var(--ok)}
-  .mailhint{margin-top:14px;font-size:.86rem;color:var(--dim);max-width:34em}
 
   footer{border-top:1px solid var(--line);padding:20px 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)}
   footer a{color:var(--dim)}footer a:hover{color:var(--orange)}
@@ -489,7 +493,7 @@
         <p class="lang-en">Every report ships with a Prüfprotokoll listing exactly the points that need your judgement. <strong>Revisions are unlimited until the report is ready to submit</strong> — at no extra charge. And the first report is free anyway: you risk nothing but an email.</p>
       </details>
       <details class="faq-item">
-        <summary><span class="lang-de">Sind die Daten meiner Kunden sicher?</span><span class="lang-en">Is my clients' data safe?</span></summary>
+        <summary><span class="lang-de">Was passiert mit den Daten meiner Kunden?</span><span class="lang-en">What happens to my clients' data?</span></summary>
         <p class="lang-de">Die Verarbeitung läuft lokal. Nichts, was Sie schicken, trainiert ein KI-Modell, und nichts wird an Dritte weitergegeben. Nach Abschluss des Auftrags und Ablauf gesetzlicher Aufbewahrungsfristen werden die Unterlagen gelöscht.</p>
         <p class="lang-en">Processing runs locally. Nothing you send trains an AI model, and nothing is passed to third parties. Files are deleted once the job is complete and any statutory retention periods have expired.</p>
       </details>
@@ -500,13 +504,8 @@
       </details>
       <details class="faq-item">
         <summary><span class="lang-de">Was passiert nach dem kostenlosen Bericht?</span><span class="lang-en">What happens after the free report?</span></summary>
-        <p class="lang-de">€290 je Bericht. Keine Lizenz, kein Abo, keine Mindestabnahme. Sie entscheiden bei jedem Audit neu, ob Sie uns den Bericht geben.</p>
-        <p class="lang-en">€290 per report. No licence, no subscription, no minimum. You decide audit by audit whether to hand us the report.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span class="lang-de">Warum ist der erste Bericht kostenlos?</span><span class="lang-en">Why is the first report free?</span></summary>
-        <p class="lang-de">Weil Sie einer Behauptung nicht vertrauen müssen sollten. Sie sehen an Ihren eigenen Daten, ob die Qualität stimmt. Im Gegenzug bitten wir um ehrliches Feedback — auch und gerade, wenn etwas fehlt.</p>
-        <p class="lang-en">Because you shouldn't have to trust a claim. You see the quality on your own data. In return we ask for honest feedback — especially about anything that is missing.</p>
+        <p class="lang-de">€290 je Bericht. Keine Lizenz, kein Abo, keine Mindestabnahme — Sie entscheiden bei jedem Audit neu. <strong>Das kostenlose Erstexemplar gilt für die ersten fünf Kunden;</strong> danach startet die Zusammenarbeit direkt zum Berichtspreis.</p>
+        <p class="lang-en">€290 per report. No licence, no subscription, no minimum — you decide audit by audit. <strong>The free first report is for the first five clients;</strong> after that, work starts at the report price.</p>
       </details>
     </div>
   </div>
@@ -522,8 +521,6 @@
       <a class="email" id="mailLink" data-de="mailto:info@autonomex.de?subject=Erster%20Bericht%20%E2%80%94%20Autonomex&amp;body=Guten%20Tag%2C%0A%0Aich%20habe%20ein%20laufendes%20DIN-EN-16247-Audit%20und%20m%C3%B6chte%20den%20ersten%20Bericht%20testen.%0A%0AUnternehmen%3A%20%0AStandort%3A%20%0AWie%20ich%20die%20Unterlagen%20am%20liebsten%20schicke%3A%20%0A%0AViele%20Gr%C3%BC%C3%9Fe%0A" data-en="mailto:info@autonomex.de?subject=First%20report%20%E2%80%94%20Autonomex&amp;body=Hello%2C%0A%0AI%20have%20a%20DIN%20EN%2016247%20audit%20in%20progress%20and%20would%20like%20to%20try%20the%20first%20report.%0A%0ACompany%3A%20%0ASite%3A%20%0AHow%20I%20would%20prefer%20to%20send%20the%20files%3A%20%0A%0ABest%20regards%0A" href="#">▸ info@autonomex.de</a>
       <button class="copybtn" id="copyMail" type="button" data-mail="info@autonomex.de"><span class="lang-de">Adresse kopieren</span><span class="lang-en">Copy address</span></button>
     </div>
-    <p class="mailhint lang-de">Öffnet Ihr Mailprogramm mit einer vorbereiteten Nachricht. Kein Mailprogramm? Adresse kopieren und im Webmail einfügen.</p>
-    <p class="mailhint lang-en">Opens your mail client with a prepared message. No mail client? Copy the address and paste it into your webmail.</p>
   </div>
 </section>
 
