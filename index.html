@@ -485,8 +485,8 @@
       </details>
       <details class="faq-item">
         <summary><span class="lang-de">Was, wenn im Bericht etwas nicht stimmt?</span><span class="lang-en">What if something in the report is wrong?</span></summary>
-        <p class="lang-de">Jeder Bericht kommt mit einem Prüfprotokoll, das genau die Punkte auflistet, die Ihre Beurteilung brauchen. Korrekturen im laufenden Auftrag kosten nichts. Und der erste Bericht ist ohnehin kostenlos — Sie riskieren nichts außer einer E-Mail.</p>
-        <p class="lang-en">Every report ships with a Prüfprotokoll listing exactly the points that need your judgement. Corrections within the same job cost nothing. And the first report is free anyway — you risk nothing but an email.</p>
+        <p class="lang-de">Jeder Bericht kommt mit einem Prüfprotokoll, das genau die Punkte auflistet, die Ihre Beurteilung brauchen. <strong>Korrekturschleifen sind unbegrenzt, bis der Bericht einreichfähig ist</strong> — ohne Aufpreis. Und der erste Bericht ist ohnehin kostenlos: Sie riskieren nichts außer einer E-Mail.</p>
+        <p class="lang-en">Every report ships with a Prüfprotokoll listing exactly the points that need your judgement. <strong>Revisions are unlimited until the report is ready to submit</strong> — at no extra charge. And the first report is free anyway: you risk nothing but an email.</p>
       </details>
       <details class="faq-item">
         <summary><span class="lang-de">Sind die Daten meiner Kunden sicher?</span><span class="lang-en">Is my clients' data safe?</span></summary>
@@ -519,7 +519,7 @@
     <p class="lang-de">Schicken Sie die Rohdaten eines kürzlich abgeschlossenen Audits — Rechnungen, Zählerdaten, Ihre Notizen und Fotos. Sie bekommen den fertigen Beratungsbericht zurück.</p>
     <p class="lang-en">Send the raw material from one recent audit — invoices, meter exports, your notes and photos. You get the finished Beratungsbericht back.</p>
     <div class="mailrow">
-      <a class="email" href="mailto:info@autonomex.de?subject=Erster%20Bericht%20%E2%80%94%20Autonomex&body=Guten%20Tag%2C%0A%0Aich%20habe%20ein%20laufendes%20DIN-EN-16247-Audit%20und%20m%C3%B6chte%20den%20ersten%20Bericht%20testen.%0A%0AUnternehmen%3A%20%0AStandort%3A%20%0AWie%20ich%20die%20Unterlagen%20am%20liebsten%20schicke%3A%20%0A%0AViele%20Gr%C3%BC%C3%9Fe%0A">▸ info@autonomex.de</a>
+      <a class="email" id="mailLink" data-de="mailto:info@autonomex.de?subject=Erster%20Bericht%20%E2%80%94%20Autonomex&amp;body=Guten%20Tag%2C%0A%0Aich%20habe%20ein%20laufendes%20DIN-EN-16247-Audit%20und%20m%C3%B6chte%20den%20ersten%20Bericht%20testen.%0A%0AUnternehmen%3A%20%0AStandort%3A%20%0AWie%20ich%20die%20Unterlagen%20am%20liebsten%20schicke%3A%20%0A%0AViele%20Gr%C3%BC%C3%9Fe%0A" data-en="mailto:info@autonomex.de?subject=First%20report%20%E2%80%94%20Autonomex&amp;body=Hello%2C%0A%0AI%20have%20a%20DIN%20EN%2016247%20audit%20in%20progress%20and%20would%20like%20to%20try%20the%20first%20report.%0A%0ACompany%3A%20%0ASite%3A%20%0AHow%20I%20would%20prefer%20to%20send%20the%20files%3A%20%0A%0ABest%20regards%0A" href="#">▸ info@autonomex.de</a>
       <button class="copybtn" id="copyMail" type="button" data-mail="info@autonomex.de"><span class="lang-de">Adresse kopieren</span><span class="lang-en">Copy address</span></button>
     </div>
     <p class="mailhint lang-de">Öffnet Ihr Mailprogramm mit einer vorbereiteten Nachricht. Kein Mailprogramm? Adresse kopieren und im Webmail einfügen.</p>
@@ -557,10 +557,12 @@
   });
 
   const langBtn = document.getElementById('langToggle');
+  const mailLink = document.getElementById('mailLink');
   function setLang(lang){
     document.body.classList.toggle('en', lang === 'en');
     document.documentElement.lang = lang;
     langBtn.textContent = lang === 'en' ? 'DE' : 'EN';
+    if (mailLink) mailLink.href = lang === 'en' ? mailLink.dataset.en : mailLink.dataset.de;
     try{ localStorage.setItem('autonomex-lang', lang); }catch(e){}
   }
   let saved = 'de';
