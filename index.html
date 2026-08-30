@@ -159,6 +159,23 @@
   .authorship p{color:var(--dim);max-width:44em;font-size:.98rem}
   .authorship p strong{color:var(--fog);font-weight:600}
 
+  /* roadmap */
+  .roadmap{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--steel);
+    margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px)}
+  @media(max-width:860px){.roadmap{grid-template-columns:1fr}}
+  .rm-col{background:var(--panel);padding:clamp(26px,3vw,38px)}
+  .rm-now{background:var(--panel);background-image:radial-gradient(420px 180px at 0% 0%,var(--orange-glow),transparent)}
+  .rm-head{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+  .rm-now .rm-head{color:var(--orange)}
+  .rm-next .rm-head{color:var(--dim)}
+  .rm-main{font-family:var(--black);text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.9rem);color:var(--fog);margin-bottom:12px}
+  .rm-col p{color:var(--dim);font-size:.94rem;max-width:30em}
+  .rm-next ul{margin:0;padding:0}
+  .rm-next li{list-style:none;font-family:var(--mono);font-size:.88rem;color:var(--fog);padding:10px 0;
+    border-bottom:1px dashed var(--line)}
+  .rm-next li span{color:var(--dim)}
+  .rm-note{margin-top:18px;font-size:.88rem !important}
+
   /* faq */
   .faq{margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px);border-top:1px solid var(--line)}
   .faq-item{border-bottom:1px solid var(--line)}
@@ -260,7 +277,7 @@
       AUTONOMEX
     </a>
     <div class="nav-r">
-      <a href="#authorship" class="lang-de">Zusammenarbeit</a><a href="#authorship" class="lang-en">How we work</a>
+      <a href="#leistung" class="lang-de">Leistung</a><a href="#leistung" class="lang-en">Service</a>
       <a href="#workorder" class="lang-de">Preise</a><a href="#workorder" class="lang-en">Pricing</a>
       <a href="#faq" class="lang-de">FAQ</a><a href="#faq" class="lang-en">FAQ</a>
       <a class="cta" href="#contact"><span class="lang-de">Bericht anfordern</span><span class="lang-en">Get a report</span></a>
@@ -444,9 +461,33 @@
   </div>
 </section>
 
+<section id="leistung">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·05</span><span class="lab lang-de">Leistung</span><span class="lab lang-en">Service</span></div>
+    <div class="roadmap rv">
+      <div class="rm-col rm-now">
+        <div class="rm-head lang-de">Heute</div><div class="rm-head lang-en">Available today</div>
+        <div class="rm-main">DIN EN 16247-1</div>
+        <p class="lang-de">Energieaudit — Einzelstandort, KMU, Querschnittstechnologien. Vollständiger Beratungsbericht, BAFA-konform.</p>
+        <p class="lang-en">Energy audit — single site, SME, cross-cutting technologies. Full Beratungsbericht, BAFA-compliant.</p>
+      </div>
+      <div class="rm-col rm-next">
+        <div class="rm-head lang-de">In Vorbereitung</div><div class="rm-head lang-en">In preparation</div>
+        <ul>
+          <li>DIN EN 16247-2 <span class="lang-de">— Gebäude</span><span class="lang-en">— buildings</span></li>
+          <li>DIN EN 16247-3 <span class="lang-de">— Prozesse</span><span class="lang-en">— processes</span></li>
+          <li>ISO 50001 <span class="lang-de">— Dokumentation</span><span class="lang-en">— documentation</span></li>
+        </ul>
+        <p class="rm-note lang-de">Was als Nächstes kommt, richtet sich danach, was unsere Kunden tatsächlich brauchen. Sagen Sie uns, was fehlt.</p>
+        <p class="rm-note lang-en">What we build next follows what our clients actually ask for. Tell us what is missing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="workorder">
   <div class="wrap">
-    <div class="plate rv"><span class="no">STA·05</span><span class="lab lang-de">Leistung und Preis</span><span class="lab lang-en">Service and price</span></div>
+    <div class="plate rv"><span class="no">STA·06</span><span class="lab lang-de">Leistung und Preis</span><span class="lab lang-en">Service and price</span></div>
     <div class="rv"><h2><span class="lang-de">Der erste Bericht geht <span class="org">auf uns.</span></span><span class="lang-en">The first report is <span class="org">on us.</span></span></h2></div>
     <div class="workorder rv">
       <div class="wo-body">
@@ -470,7 +511,7 @@
 
 <section id="faq">
   <div class="wrap">
-    <div class="plate rv"><span class="no">STA·06</span><span class="lab lang-de">Häufige Fragen</span><span class="lab lang-en">Common questions</span></div>
+    <div class="plate rv"><span class="no">STA·07</span><span class="lab lang-de">Häufige Fragen</span><span class="lab lang-en">Common questions</span></div>
     <div class="faq rv">
       <details class="faq-item">
         <summary><span class="lang-de">Ersetzt das meine fachliche Beurteilung?</span><span class="lang-en">Does this replace my professional judgement?</span></summary>
@@ -513,7 +554,7 @@
 
 <section class="contact" id="contact" style="border-bottom:0">
   <div class="wrap rv">
-    <div class="plate" style="padding-top:0"><span class="no">STA·07</span><span class="lab lang-de">Anfrage</span><span class="lab lang-en">Get in touch</span></div>
+    <div class="plate" style="padding-top:0"><span class="no">STA·08</span><span class="lab lang-de">Anfrage</span><span class="lab lang-en">Get in touch</span></div>
     <div class="big"><span class="lang-de">Ein Bericht zeigt, <span class="org">ob das passt.</span></span><span class="lang-en">One report tells you <span class="org">if this fits.</span></span></div>
     <p class="lang-de">Schicken Sie die Rohdaten eines kürzlich abgeschlossenen Audits — Rechnungen, Zählerdaten, Ihre Notizen und Fotos. Sie bekommen den fertigen Beratungsbericht zurück.</p>
     <p class="lang-en">Send the raw material from one recent audit — invoices, meter exports, your notes and photos. You get the finished Beratungsbericht back.</p>
