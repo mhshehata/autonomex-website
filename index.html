@@ -107,8 +107,8 @@
   /* ============ SECTIONS ============ */
   section{border-bottom:1px solid var(--line);position:relative}
   .plate{display:flex;align-items:center;gap:18px;padding:clamp(44px,6vw,76px) 0 clamp(24px,3vw,40px)}
-  .plate .no{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--coal);background:var(--orange);padding:5px 12px;font-weight:600}
-  .plate .lab{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer)}
+  .plate .no{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;color:var(--coal);background:var(--orange);padding:6px 13px;font-weight:600}
+  .plate .lab{font-family:var(--mono);font-size:.92rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fog);font-weight:500}
   h2{font-family:var(--black);font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.04;text-transform:uppercase;letter-spacing:-.005em;max-width:19em;margin-bottom:14px}
   h2 .org{color:var(--orange)}
   .sec-sub{color:var(--dim);max-width:42em;font-size:1rem}
@@ -153,6 +153,18 @@
   .authorship .big .org{color:var(--orange)}
   .authorship p{color:var(--dim);max-width:44em;font-size:.98rem}
   .authorship p strong{color:var(--fog);font-weight:600}
+
+  /* faq */
+  .faq{margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px);border-top:1px solid var(--line)}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-item summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;position:relative;
+    font-weight:600;font-size:1.02rem;color:var(--fog);transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary:hover{color:var(--orange)}
+  .faq-item summary::after{content:"+";position:absolute;right:6px;top:17px;font-family:var(--mono);
+    font-size:1.3rem;color:var(--orange);transition:transform .2s}
+  .faq-item[open] summary::after{content:"−"}
+  .faq-item p{color:var(--dim);padding:0 40px 22px 0;max-width:46em;font-size:.96rem}
 
   /* credentials */
   .creds{border-left:2px solid var(--orange);padding:clamp(20px,2.5vw,28px) 0 clamp(20px,2.5vw,28px) clamp(20px,2.5vw,30px);
@@ -207,9 +219,10 @@
   .wo-list li::before{content:"▸";color:var(--orange);font-family:var(--mono);position:absolute;left:0;top:11px}
   .wo-price{border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;padding:38px 24px;text-align:center;background:radial-gradient(300px 200px at 50% 0%,var(--orange-glow),transparent)}
   @media(max-width:860px){.wo-price{border-left:0;border-top:1px solid var(--line)}}
-  .wo-price small{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  .wo-price small{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog)}
   .wo-price b{font-family:var(--black);font-size:2.6rem;color:var(--orange);line-height:1}
-  .wo-price em{font-style:normal;font-size:.82rem;color:var(--dim);max-width:15em}
+  .wo-price em{font-style:normal;font-size:.9rem;color:var(--fog);max-width:16em;line-height:1.5}
+  .wo-price .lead{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-top:4px}
 
   /* contact */
   .contact{padding:clamp(56px,8vw,110px) 0}
@@ -218,6 +231,13 @@
   .contact p{margin-top:20px;color:var(--dim);max-width:36em}
   .contact .email{display:inline-block;margin-top:34px;font-family:var(--mono);font-size:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--orange);padding:18px 32px;color:var(--fog);letter-spacing:.02em;transition:all .15s}
   .contact .email:hover{background:var(--orange);color:var(--coal)}
+  .mailrow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:34px}
+  .contact .email{margin-top:0}
+  .copybtn{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+    background:none;border:1px solid var(--steel);color:var(--dim);padding:0 20px;transition:all .15s}
+  .copybtn:hover{border-color:var(--orange);color:var(--orange)}
+  .copybtn.done{border-color:var(--ok);color:var(--ok)}
+  .mailhint{margin-top:14px;font-size:.86rem;color:var(--dim);max-width:34em}
 
   footer{border-top:1px solid var(--line);padding:20px 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)}
   footer a{color:var(--dim)}footer a:hover{color:var(--orange)}
@@ -238,7 +258,8 @@
     <div class="nav-r">
       <a href="#authorship" class="lang-de">Zusammenarbeit</a><a href="#authorship" class="lang-en">How we work</a>
       <a href="#workorder" class="lang-de">Preise</a><a href="#workorder" class="lang-en">Pricing</a>
-      <a class="cta" href="mailto:info@autonomex.de"><span class="lang-de">Bericht anfordern</span><span class="lang-en">Get a report</span></a>
+      <a href="#faq" class="lang-de">FAQ</a><a href="#faq" class="lang-en">FAQ</a>
+      <a class="cta" href="#contact"><span class="lang-de">Bericht anfordern</span><span class="lang-en">Get a report</span></a>
       <a class="langbtn" id="langToggle">EN</a>
     </div>
   </div>
@@ -252,7 +273,7 @@
     <p class="hero-sub lang-de"><strong>Schicken Sie Ihre Auditunterlagen</strong> — Rechnungen, Zählerdaten, Ihre Notizen, egal wie unsortiert. Zurück kommt der fertige DIN-EN-16247-Beratungsbericht. Sie prüfen, Sie unterschreiben, Sie versenden.</p>
     <p class="hero-sub lang-en"><strong>Send your audit files</strong> — invoices, meter data, your notes, however messy. Back comes a finished DIN EN 16247 Beratungsbericht. You review it, you sign it, you send it.</p>
     <div class="hero-ctas">
-      <a class="btn btn-solid" href="mailto:info@autonomex.de"><span class="lang-de">Ersten Bericht anfordern</span><span class="lang-en">Get your first report</span></a>
+      <a class="btn btn-solid" href="#contact"><span class="lang-de">Ersten Bericht anfordern</span><span class="lang-en">Get your first report</span></a>
     </div>
     <p class="hero-scarcity">
       <span class="lang-de"><b class="tag-free">Kostenlos</b> <b class="tag-five">Nur 5 Plätze</b> Erster Bericht gratis — danach €290 je Bericht.</span><span class="lang-en"><b class="tag-free">Free</b> <b class="tag-five">Only 5 places</b> First report on us — then €290 per report.</span>
@@ -394,8 +415,8 @@
   <div class="wrap">
     <div class="plate rv"><span class="no">STA·03</span><span class="lab lang-de">Wer den Bericht baut</span><span class="lab lang-en">Who builds the report</span></div>
     <div class="creds rv">
-      <p class="lang-de">Autonomex wird von einem Ingenieur mit <strong>zehn Jahren Betriebserfahrung in der Energiewirtschaft</strong> betrieben. Kein Chatbot-Wrapper, kein Textgenerator — eine geprüfte Rechenkette, davor jemand, der weiß, was eine kWh-Baseline ist und worauf Prüfer achten.</p>
-      <p class="lang-en">Autonomex is run by an engineer with <strong>ten years of operational experience in the energy industry</strong>. Not a chatbot wrapper, not a text generator — a validated calculation chain, with someone in front of it who knows what a kWh baseline is and what auditors check.</p>
+      <p class="lang-de">Kein Chatbot-Wrapper, kein Textgenerator — <strong>eine geprüfte Rechenkette</strong>, davor jemand, der weiß, was eine kWh-Baseline ist und worauf Prüfer achten.</p>
+      <p class="lang-en">Not a chatbot wrapper, not a text generator — <strong>a validated calculation chain</strong>, with someone in front of it who knows what a kWh baseline is and what auditors check.</p>
       <ul class="credlist">
         <li><span class="lang-de">10 J. Betrieb — Energiewirtschaft</span><span class="lang-en">10 yrs operations — energy industry</span></li>
         <li><span class="lang-de">M.Sc. Energietechnik &amp; -wirtschaft, TU Berlin</span><span class="lang-en">M.Sc. Energy Engineering &amp; Economics, TU Berlin</span></li>
@@ -424,7 +445,6 @@
     <div class="plate rv"><span class="no">STA·05</span><span class="lab lang-de">Leistung und Preis</span><span class="lab lang-en">Service and price</span></div>
     <div class="rv"><h2><span class="lang-de">Der erste Bericht geht <span class="org">auf uns.</span></span><span class="lang-en">The first report is <span class="org">on us.</span></span></h2></div>
     <div class="workorder rv">
-      <div class="wo-head"><span class="lang-de">AUFTRAG Nº <b>001</b></span><span class="lang-en">WORK ORDER Nº <b>001</b></span><span class="lang-de">DURCHLAUFZEIT: <b>48 STUNDEN</b></span><span class="lang-en">LEAD TIME: <b>48 HOURS</b></span></div>
       <div class="wo-body">
         <ul class="wo-list">
           <li class="lang-de"><strong>Sie schicken die Unterlagen</strong> — an einem echten, laufenden Audit. Egal wie unsortiert.</li><li class="lang-en"><strong>You send the files</strong> — from a real audit you are running now. However messy.</li>
@@ -435,6 +455,7 @@
         <div class="wo-price">
           <small class="lang-de">Erster Bericht — für die ersten fünf Kunden</small><small class="lang-en">First report — for the first five clients</small>
           <b class="lang-de">kostenlos</b><b class="lang-en">free</b>
+          <span class="lead lang-de">Rücklauf: 48 Stunden</span><span class="lead lang-en">Back with you: 48 hours</span>
           <em class="lang-de">Ist der erste nicht einreichfähig, haben Sie nichts verloren außer einer E-Mail.</em>
           <em class="lang-en">If the first one isn't good enough to submit, you've lost nothing but an email.</em>
         </div>
@@ -443,13 +464,66 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·06</span><span class="lab lang-de">Häufige Fragen</span><span class="lab lang-en">Common questions</span></div>
+    <div class="faq rv">
+      <details class="faq-item">
+        <summary><span class="lang-de">Ersetzt das meine fachliche Beurteilung?</span><span class="lang-en">Does this replace my professional judgement?</span></summary>
+        <p class="lang-de">Nein. Wir erfinden nichts. Welche Maßnahme sinnvoll ist, welche Einsparung realistisch ist, welche Annahme gilt — das entscheiden Sie. Wir strukturieren, rechnen und formatieren, was Sie uns geben.</p>
+        <p class="lang-en">No. We invent nothing. Which measure makes sense, which saving is realistic, which assumption applies — that is your call. We structure, calculate and format what you give us.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="lang-de">Wer ist für den Bericht verantwortlich?</span><span class="lang-en">Who is responsible for the report?</span></summary>
+        <p class="lang-de">Sie. Sie prüfen, unterschreiben und reichen ein — Ihr Name steht darauf. Wir sind keine Energieberater und führen keine Audits durch.</p>
+        <p class="lang-en">You are. You review, sign and submit — your name is on it. We are not Energieberater and we do not carry out audits.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="lang-de">Wie schicke ich meine Unterlagen?</span><span class="lang-en">How do I send my files?</span></summary>
+        <p class="lang-de">So, wie Sie es ohnehin tun: E-Mail, Ihr eigener Cloud-Ordner, ein Freigabelink. Sagen Sie uns, was Ihnen passt — wir richten uns danach. Für große Dateien ist ein Freigabelink meist am einfachsten.</p>
+        <p class="lang-en">However you already do it: email, your own cloud folder, a share link. Tell us what suits you and we work with it. For large files a share link is usually simplest.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="lang-de">Was, wenn im Bericht etwas nicht stimmt?</span><span class="lang-en">What if something in the report is wrong?</span></summary>
+        <p class="lang-de">Jeder Bericht kommt mit einem Prüfprotokoll, das genau die Punkte auflistet, die Ihre Beurteilung brauchen. Korrekturen im laufenden Auftrag kosten nichts. Und der erste Bericht ist ohnehin kostenlos — Sie riskieren nichts außer einer E-Mail.</p>
+        <p class="lang-en">Every report ships with a Prüfprotokoll listing exactly the points that need your judgement. Corrections within the same job cost nothing. And the first report is free anyway — you risk nothing but an email.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="lang-de">Sind die Daten meiner Kunden sicher?</span><span class="lang-en">Is my clients' data safe?</span></summary>
+        <p class="lang-de">Die Verarbeitung läuft lokal. Nichts, was Sie schicken, trainiert ein KI-Modell, und nichts wird an Dritte weitergegeben. Nach Abschluss des Auftrags und Ablauf gesetzlicher Aufbewahrungsfristen werden die Unterlagen gelöscht.</p>
+        <p class="lang-en">Processing runs locally. Nothing you send trains an AI model, and nothing is passed to third parties. Files are deleted once the job is complete and any statutory retention periods have expired.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="lang-de">Welche Audits sind nicht abgedeckt?</span><span class="lang-en">Which audits are out of scope?</span></summary>
+        <p class="lang-de">BHKW und KWK, Photovoltaik und Eigenerzeugung, Mehrstandort-Audits, mehrjährige klimabereinigte Bilanzen, Viertelstunden-Lastganganalysen, Stromsteuer- und Energiesteuerentlastung sowie Fuhrpark. Der Standardfall — einzelner Standort, KMU, Querschnittstechnologien — passt.</p>
+        <p class="lang-en">CHP/BHKW, photovoltaics and self-generation, multi-site audits, multi-year climate-corrected balances, quarter-hour load analysis, electricity- and energy-tax relief, and vehicle fleets. The standard case — single site, SME, cross-cutting technologies — is the fit.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="lang-de">Was passiert nach dem kostenlosen Bericht?</span><span class="lang-en">What happens after the free report?</span></summary>
+        <p class="lang-de">€290 je Bericht. Keine Lizenz, kein Abo, keine Mindestabnahme. Sie entscheiden bei jedem Audit neu, ob Sie uns den Bericht geben.</p>
+        <p class="lang-en">€290 per report. No licence, no subscription, no minimum. You decide audit by audit whether to hand us the report.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="lang-de">Warum ist der erste Bericht kostenlos?</span><span class="lang-en">Why is the first report free?</span></summary>
+        <p class="lang-de">Weil Sie einer Behauptung nicht vertrauen müssen sollten. Sie sehen an Ihren eigenen Daten, ob die Qualität stimmt. Im Gegenzug bitten wir um ehrliches Feedback — auch und gerade, wenn etwas fehlt.</p>
+        <p class="lang-en">Because you shouldn't have to trust a claim. You see the quality on your own data. In return we ask for honest feedback — especially about anything that is missing.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section class="contact" id="contact" style="border-bottom:0">
   <div class="wrap rv">
-    <div class="plate" style="padding-top:0"><span class="no">STA·06</span><span class="lab lang-de">Anfrage</span><span class="lab lang-en">Get in touch</span></div>
+    <div class="plate" style="padding-top:0"><span class="no">STA·07</span><span class="lab lang-de">Anfrage</span><span class="lab lang-en">Get in touch</span></div>
     <div class="big"><span class="lang-de">Ein Bericht zeigt, <span class="org">ob das passt.</span></span><span class="lang-en">One report tells you <span class="org">if this fits.</span></span></div>
     <p class="lang-de">Schicken Sie die Rohdaten eines kürzlich abgeschlossenen Audits — Rechnungen, Zählerdaten, Ihre Notizen und Fotos. Sie bekommen den fertigen Beratungsbericht zurück.</p>
     <p class="lang-en">Send the raw material from one recent audit — invoices, meter exports, your notes and photos. You get the finished Beratungsbericht back.</p>
-    <a class="email" href="mailto:info@autonomex.de">▸ info@autonomex.de</a>
+    <div class="mailrow">
+      <a class="email" href="mailto:info@autonomex.de?subject=Erster%20Bericht%20%E2%80%94%20Autonomex&body=Guten%20Tag%2C%0A%0Aich%20habe%20ein%20laufendes%20DIN-EN-16247-Audit%20und%20m%C3%B6chte%20den%20ersten%20Bericht%20testen.%0A%0AUnternehmen%3A%20%0AStandort%3A%20%0AWie%20ich%20die%20Unterlagen%20am%20liebsten%20schicke%3A%20%0A%0AViele%20Gr%C3%BC%C3%9Fe%0A">▸ info@autonomex.de</a>
+      <button class="copybtn" id="copyMail" type="button" data-mail="info@autonomex.de"><span class="lang-de">Adresse kopieren</span><span class="lang-en">Copy address</span></button>
+    </div>
+    <p class="mailhint lang-de">Öffnet Ihr Mailprogramm mit einer vorbereiteten Nachricht. Kein Mailprogramm? Adresse kopieren und im Webmail einfügen.</p>
+    <p class="mailhint lang-en">Opens your mail client with a prepared message. No mail client? Copy the address and paste it into your webmail.</p>
   </div>
 </section>
 
@@ -469,6 +543,18 @@
     }
   }),{threshold:.15});
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+  const cb = document.getElementById('copyMail');
+  if (cb) cb.addEventListener('click', async () => {
+    const addr = cb.dataset.mail;
+    try { await navigator.clipboard.writeText(addr); }
+    catch(e){ const t=document.createElement('textarea'); t.value=addr; document.body.appendChild(t);
+              t.select(); try{document.execCommand('copy');}catch(_){} t.remove(); }
+    const prev = cb.innerHTML;
+    cb.classList.add('done');
+    cb.textContent = document.body.classList.contains('en') ? '✓ Copied' : '✓ Kopiert';
+    setTimeout(()=>{ cb.classList.remove('done'); cb.innerHTML = prev; }, 2000);
+  });
 
   const langBtn = document.getElementById('langToggle');
   function setLang(lang){
