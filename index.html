@@ -69,6 +69,8 @@
   h1 .org{color:var(--orange)}
   .hero-sub{margin-top:28px;font-size:clamp(1rem,1.6vw,1.2rem);color:var(--dim);max-width:36em}
   .hero-sub strong{color:var(--fog);font-weight:600}
+  .hero-scarcity{margin-top:16px;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--dim)}
+  .hero-scarcity strong{color:var(--orange);font-weight:600}
   .hero-ctas{margin-top:38px;display:flex;flex-wrap:wrap;border:1px solid var(--steel);width:fit-content}
   .btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:17px 30px;transition:all .15s}
   .btn-solid{background:var(--orange);color:var(--coal);font-weight:600}
@@ -132,6 +134,16 @@
   .station h3{font-family:var(--black);text-transform:uppercase;font-size:1.05rem;margin:22px 0 8px;letter-spacing:.02em}
   .station p{color:var(--dim);font-size:.85rem}
   .station .tag{margin-top:14px;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:var(--orange)}
+
+  /* authorship band */
+  .authorship{border:1px solid var(--orange);background:var(--panel);margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px);
+    padding:clamp(30px,4vw,48px) clamp(24px,3vw,44px);position:relative;
+    background-image:radial-gradient(600px 220px at 12% 0%,var(--orange-glow),transparent)}
+  .authorship .big{font-family:var(--black);text-transform:uppercase;line-height:1.05;letter-spacing:-.005em;
+    font-size:clamp(1.35rem,3vw,2.2rem);max-width:16em;margin-bottom:18px}
+  .authorship .big .org{color:var(--orange)}
+  .authorship p{color:var(--dim);max-width:44em;font-size:.98rem}
+  .authorship p strong{color:var(--fog);font-weight:600}
 
   /* output gauges */
   .gauges{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--steel);margin:clamp(30px,4vw,52px) 0 clamp(48px,6vw,80px)}
@@ -207,6 +219,7 @@
     <div class="nav-r">
       <a href="#faults" class="lang-de">Fehlerbericht</a><a href="#faults" class="lang-en">Fault report</a>
       <a href="#line" class="lang-de">Die Linie</a><a href="#line" class="lang-en">The line</a>
+      <a href="#authorship" class="lang-de">Zuständigkeiten</a><a href="#authorship" class="lang-en">Who does what</a>
       <a href="#workorder" class="lang-de">Angebot</a><a href="#workorder" class="lang-en">Work order</a>
       <a class="cta" href="mailto:info@autonomex.de"><span class="lang-de">Bericht anfordern</span><span class="lang-en">Get a report</span></a>
       <a class="langbtn" id="langToggle">EN</a>
@@ -234,6 +247,7 @@
       <a class="btn btn-solid" href="mailto:info@autonomex.de"><span class="lang-de">Ersten Bericht anfordern</span><span class="lang-en">Get your first report</span></a>
       <a class="btn btn-line" href="#line"><span class="lang-de">Die Linie ansehen</span><span class="lang-en">Inspect the line</span></a>
     </div>
+    <p class="hero-scarcity"><span class="lang-de">Erster Bericht <strong>kostenlos</strong> — für die ersten fünf Kunden. Danach €290 je Bericht.</span><span class="lang-en">First report <strong>free</strong> — for the first five clients. Then €290 per report.</span></p>
   </div>
 
   <div class="line-stage">
@@ -433,6 +447,17 @@
   </div>
 </section>
 
+<section id="authorship">
+  <div class="wrap">
+    <div class="plate rv"><span class="no">STA·04b</span><span class="lab lang-de">Zuständigkeiten</span><span class="lab lang-en">Who does what</span></div>
+    <div class="authorship rv">
+      <div class="big"><span class="lang-de">Sie machen das Audit.<br>Ich mache die <span class="org">Schreibarbeit.</span></span><span class="lang-en">You do the audit.<br>I do the <span class="org">paperwork.</span></span></div>
+      <p class="lang-de"><strong>Ich bin kein Energieberater und führe keine Audits durch.</strong> Ich erfinde keine Maßnahme, keine Einsparung, keine Annahme — jede Zahl im Bericht ist eine Zahl von Ihnen. Wo etwas fehlt oder nicht aufgeht, bekommen Sie eine Rückfrage, keine Vermutung. <strong>Ihr Name steht auf dem Bericht. Also bleibt jede fachliche Entscheidung Ihre.</strong></p>
+      <p class="lang-en"><strong>I'm not an Energieberater and I don't audit anything.</strong> I never invent a measure, a saving or an assumption — every number in the report is one you gave me. Where something is missing or doesn't add up, you get a question, never a guess. <strong>Your name goes on the report. So every judgement in it stays yours.</strong></p>
+    </div>
+  </div>
+</section>
+
 <section id="workorder">
   <div class="wrap">
     <div class="plate rv"><span class="no">STA·05</span><span class="lab lang-de">Angebot — Design-Partner-Pilot</span><span class="lab lang-en">Work order — design-partner pilot</span></div>
@@ -443,11 +468,11 @@
         <ul class="wo-list">
           <li class="lang-de"><strong>Sie schicken die Unterlagen</strong> — an einem echten, laufenden Audit. Egal wie unsortiert.</li><li class="lang-en"><strong>You send the files</strong> — from a real audit you are running now. However messy.</li>
           <li class="lang-de"><strong>Ich baue den Bericht</strong> — fertiger Beratungsbericht, Word + PDF, inkl. Sankey, Kennzahlen und Prüfprotokoll.</li><li class="lang-en"><strong>I build the report</strong> — finished Beratungsbericht, Word + PDF, incl. Sankey, KPIs and Prüfprotokoll.</li>
-          <li class="lang-de"><strong>Sie prüfen, unterschreiben, versenden</strong> — Sie bleiben Verfasser, jede fachliche Entscheidung bleibt Ihre.</li><li class="lang-en"><strong>You review, sign, send</strong> — you remain the author; every professional judgement stays yours.</li>
+          <li class="lang-de"><strong>Sie prüfen, unterschreiben, versenden</strong> — in 48 Stunden zurück bei Ihnen.</li><li class="lang-en"><strong>You review, sign, send</strong> — back with you inside 48 hours.</li>
           <li class="lang-de">Danach <strong>€290 je Bericht</strong>. Keine Lizenz, kein Abo, keine Mindestabnahme.</li><li class="lang-en">Then <strong>€290 per report</strong>. No licence, no subscription, no minimum.</li>
         </ul>
         <div class="wo-price">
-          <small class="lang-de">Erster Bericht — für die ersten fünf</small><small class="lang-en">First report — for the first five</small>
+          <small class="lang-de">Erster Bericht — für die ersten fünf Kunden</small><small class="lang-en">First report — for the first five clients</small>
           <b class="lang-de">kostenlos</b><b class="lang-en">free</b>
           <em class="lang-de">Ist der erste nicht einreichfähig, haben Sie nichts verloren außer einer E-Mail.</em>
           <em class="lang-en">If the first one isn't good enough to submit, you've lost nothing but an email.</em>
