@@ -170,9 +170,10 @@
   .wo-body{display:grid;grid-template-columns:1fr 320px}
   @media(max-width:860px){.wo-body{grid-template-columns:1fr}}
   .wo-list{padding:clamp(24px,3vw,40px)}
-  .wo-list li{list-style:none;display:flex;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line);color:var(--dim);font-size:.94rem}
+  .wo-list li{list-style:none;position:relative;padding:11px 0 11px 26px;border-bottom:1px dashed var(--line);color:var(--dim);font-size:.94rem}
+  .wo-list li strong{color:var(--fog);font-weight:600}
   .wo-list li:last-child{border-bottom:0}
-  .wo-list li::before{content:"▸";color:var(--orange);font-family:var(--mono)}
+  .wo-list li::before{content:"▸";color:var(--orange);font-family:var(--mono);position:absolute;left:0;top:11px}
   .wo-price{border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;padding:38px 24px;text-align:center;background:radial-gradient(300px 200px at 50% 0%,var(--orange-glow),transparent)}
   @media(max-width:860px){.wo-price{border-left:0;border-top:1px solid var(--line)}}
   .wo-price small{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
@@ -227,8 +228,8 @@
   <div class="wrap">
     <div class="hero-tag"><span class="lang-de">Berichtsfertigung — DIN EN 16247 / BAFA</span><span class="lang-en">Report manufacturing — DIN EN 16247 / BAFA</span></div>
     <h1><span class="lang-de">Ihre Berichte,<br><span class="hollow">geliefert</span><span class="org">.</span></span><span class="lang-en">Your reports,<br><span class="hollow">manufactured</span><span class="org">.</span></span></h1>
-    <p class="hero-sub lang-de"><strong>Aus Ihren Rohdaten wird ein einreichfertiger DIN-EN-16247-Beratungsbericht.</strong> Rechnungen, Zählerdaten, Ihre Notizen und Fotos — in dem Zustand, in dem sie sind. Zurück kommt der fertige Bericht: Word + PDF, inklusive Sankey-Diagramm, Kennzahlen und Wirtschaftlichkeitsrechnung. Sie prüfen, Sie versenden.</p>
-    <p class="hero-sub lang-en"><strong>Your raw data becomes a submission-ready DIN EN 16247 Beratungsbericht.</strong> Invoices, meter exports, your notes and photos — in whatever state they are already in. Back comes the finished report: Word + PDF, including Sankey diagram, KPIs, and measure-level economics. You review, you send.</p>
+    <p class="hero-sub lang-de"><strong>Schicken Sie Ihre Auditunterlagen</strong> — Rechnungen, Zählerdaten, Ihre Notizen, egal wie unsortiert. Zurück kommt der fertige DIN-EN-16247-Beratungsbericht. Sie prüfen, Sie unterschreiben, Sie versenden.</p>
+    <p class="hero-sub lang-en"><strong>Send your audit files</strong> — invoices, meter data, your notes, however messy. Back comes a finished DIN EN 16247 Beratungsbericht. You review it, you sign it, you send it.</p>
     <div class="hero-ctas">
       <a class="btn btn-solid" href="mailto:info@autonomex.de"><span class="lang-de">Ersten Bericht anfordern</span><span class="lang-en">Get your first report</span></a>
       <a class="btn btn-line" href="#line"><span class="lang-de">Die Linie ansehen</span><span class="lang-en">Inspect the line</span></a>
@@ -435,21 +436,21 @@
 <section id="workorder">
   <div class="wrap">
     <div class="plate rv"><span class="no">STA·05</span><span class="lab lang-de">Angebot — Design-Partner-Pilot</span><span class="lab lang-en">Work order — design-partner pilot</span></div>
-    <div class="rv"><h2><span class="lang-de">Ein Bericht. Ihre echten Daten. <span class="org">Ehrliches Feedback.</span></span><span class="lang-en">One report. Your real data. <span class="org">Honest feedback.</span></span></h2></div>
+    <div class="rv"><h2><span class="lang-de">Der erste Bericht geht <span class="org">auf mich.</span></span><span class="lang-en">The first report is <span class="org">on me.</span></span></h2></div>
     <div class="workorder rv">
-      <div class="wo-head"><span class="lang-de">AUFTRAG Nº <b>001</b></span><span class="lang-en">WORK ORDER Nº <b>001</b></span><span class="lang-de">DURCHLAUFZEIT: <b>MINUTEN</b></span><span class="lang-en">LEAD TIME: <b>MINUTES</b></span></div>
+      <div class="wo-head"><span class="lang-de">AUFTRAG Nº <b>001</b></span><span class="lang-en">WORK ORDER Nº <b>001</b></span><span class="lang-de">DURCHLAUFZEIT: <b>48 STUNDEN</b></span><span class="lang-en">LEAD TIME: <b>48 HOURS</b></span></div>
       <div class="wo-body">
         <ul class="wo-list">
-          <li class="lang-de">Ihre echten (oder anonymisierten) Auditdaten durch die Engine</li><li class="lang-en">Your real (or anonymized) audit data through the engine</li>
-          <li class="lang-de">Fertiger Beratungsbericht — Word + PDF, inkl. Sankey &amp; Kennzahlen</li><li class="lang-en">Finished Beratungsbericht — Word + PDF, incl. Sankey &amp; KPIs</li>
-          <li class="lang-de">Sie prüfen — Feedback zu allem, was fehlt oder nicht stimmt</li><li class="lang-en">You review — feedback on anything missing or wrong</li>
-          <li class="lang-de">Basis-Tarif danach: €300–500 je Bericht oder €900–1.500/Jahr</li><li class="lang-en">Basic-tier pricing after: €300–500 per report or €900–1,500/year</li>
+          <li class="lang-de"><strong>Sie schicken die Unterlagen</strong> — an einem echten, laufenden Audit. Egal wie unsortiert.</li><li class="lang-en"><strong>You send the files</strong> — from a real audit you are running now. However messy.</li>
+          <li class="lang-de"><strong>Ich baue den Bericht</strong> — fertiger Beratungsbericht, Word + PDF, inkl. Sankey, Kennzahlen und Prüfprotokoll.</li><li class="lang-en"><strong>I build the report</strong> — finished Beratungsbericht, Word + PDF, incl. Sankey, KPIs and Prüfprotokoll.</li>
+          <li class="lang-de"><strong>Sie prüfen, unterschreiben, versenden</strong> — Sie bleiben Verfasser, jede fachliche Entscheidung bleibt Ihre.</li><li class="lang-en"><strong>You review, sign, send</strong> — you remain the author; every professional judgement stays yours.</li>
+          <li class="lang-de">Danach <strong>€290 je Bericht</strong>. Keine Lizenz, kein Abo, keine Mindestabnahme.</li><li class="lang-en">Then <strong>€290 per report</strong>. No licence, no subscription, no minimum.</li>
         </ul>
         <div class="wo-price">
-          <small class="lang-de">Pilotpreis — Basis-Tarif</small><small class="lang-en">Pilot price — Basic tier</small>
-          <b>€300–500</b>
-          <em class="lang-de">Amortisiert sich am ersten erstellten Bericht.</em>
-          <em class="lang-en">Pays for itself on the first report it produces.</em>
+          <small class="lang-de">Erster Bericht — für die ersten fünf</small><small class="lang-en">First report — for the first five</small>
+          <b class="lang-de">kostenlos</b><b class="lang-en">free</b>
+          <em class="lang-de">Ist der erste nicht einreichfähig, haben Sie nichts verloren außer einer E-Mail.</em>
+          <em class="lang-en">If the first one isn't good enough to submit, you've lost nothing but an email.</em>
         </div>
       </div>
     </div>
