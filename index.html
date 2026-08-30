@@ -173,7 +173,11 @@
   .rm-next ul{margin:0;padding:0}
   .rm-next li{list-style:none;font-family:var(--mono);font-size:.88rem;color:var(--fog);padding:10px 0;
     border-bottom:1px dashed var(--line)}
-  .rm-next li span{color:var(--dim)}
+  .rm-next li span{color:var(--fog)}
+  .rm-next li em{display:block;font-style:normal;font-family:var(--sans);font-size:.86rem;
+    color:var(--dim);margin-top:5px;letter-spacing:0;text-transform:none;max-width:26em}
+  .rm-second{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+  .rm-second span{font-family:var(--mono);font-size:.6em;color:var(--orange);letter-spacing:.08em}
   .rm-note{margin-top:18px;font-size:.88rem !important}
 
   /* faq */
@@ -468,15 +472,17 @@
       <div class="rm-col rm-now">
         <div class="rm-head lang-de">Heute</div><div class="rm-head lang-en">Available today</div>
         <div class="rm-main">DIN EN 16247-1</div>
-        <p class="lang-de">Energieaudit — Einzelstandort, KMU, Querschnittstechnologien. Vollständiger Beratungsbericht, BAFA-konform.</p>
-        <p class="lang-en">Energy audit — single site, SME, cross-cutting technologies. Full Beratungsbericht, BAFA-compliant.</p>
+        <p class="lang-de">Energieauditbericht — Einzelstandort, Querschnittstechnologien. Für Pflichtaudits nach § 8 EDL-G ebenso wie für geförderte Audits.</p>
+        <p class="lang-en">Energy audit report — single site, cross-cutting technologies. For § 8 EDL-G obligated audits as well as funded ones.</p>
+        <div class="rm-main rm-second">Umsetzungsplan <span>§ 9 EnEfG</span></div>
+        <p class="lang-de">Als Anhang zum Bericht — direkt aus den Maßnahmen, mit unveränderten Maßnahmenbezeichnungen, wie vom BAFA gefordert.</p>
+        <p class="lang-en">As an annex to the report — built from its own measures, with the measure names carried over unchanged, as BAFA requires.</p>
       </div>
       <div class="rm-col rm-next">
         <div class="rm-head lang-de">In Vorbereitung</div><div class="rm-head lang-en">In preparation</div>
         <ul>
-          <li>DIN EN 16247-2 <span class="lang-de">— Gebäude</span><span class="lang-en">— buildings</span></li>
-          <li>DIN EN 16247-3 <span class="lang-de">— Prozesse</span><span class="lang-en">— processes</span></li>
-          <li>ISO 50001 <span class="lang-de">— Dokumentation</span><span class="lang-en">— documentation</span></li>
+          <li><span class="lang-de">Mehrstandort-Audits</span><span class="lang-en">Multi-site audits</span>
+            <em class="lang-de">Multi-Site-Verfahren — Clusterbildung und Hochrechnung nach BAFA-Leitfaden</em><em class="lang-en">Multi-Site-Verfahren — cluster formation and extrapolation per the BAFA Leitfaden</em></li>
         </ul>
         <p class="rm-note lang-de">Was als Nächstes kommt, richtet sich danach, was unsere Kunden tatsächlich brauchen. Sagen Sie uns, was fehlt.</p>
         <p class="rm-note lang-en">What we build next follows what our clients actually ask for. Tell us what is missing.</p>
